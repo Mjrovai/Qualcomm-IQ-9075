@@ -55,7 +55,7 @@ Observations:
 
 ## LLMs with GenieX (2026-10-26, session-20261026-1441, markers-20261026-llm)
 
-Same prompts as 2026-10-14: short = "Explique em três parágrafos o que é TinyML" (256 tokens generated); long = `/data/longo.txt` (1,087 words, ~2,000 tokens, ending with a one-sentence summary request). `--think=false --seed 42 --max-tokens 256`. 20 s idle before each run; dynamic power subtracts it (6.71–6.77 W).
+Same prompts as 2026-10-14: short = "Explique em três parágrafos o que é TinyML" (256 tokens generated); long = `/data/longo.txt` (1,087 words; 1,882 tokens for Qwen3, 1,641 for Qwen3.5; ending with a one-sentence summary request). `--think=false --seed 42 --max-tokens 256`. 20 s idle before each run; dynamic power subtracts it (6.71–6.77 W).
 
 The prefill and decode windows are reconstructed from the end of generation, which is stamped inside the container (board and Mac clocks agree within ~0.02 s), using the time to first token and the decode rate that GenieX reports. The 1 s power profiles confirm the alignment: for example, Qwen3-4B on the CPU with the long prompt shows ~2 s of model load, 30 s of prefill at ~17.2 W, then 2 s of decode at ~21 W.
 
@@ -68,7 +68,7 @@ The prefill and decode windows are reconstructed from the end of generation, whi
 | Qwen3.5-0.8B Q4_0 | llama.cpp, CPU | 58.0 | 20.1 W | 13.4 W | 0.23 | 0.35 | ~10,400 |
 | Qwen3.5-0.8B Q4_0 | llama.cpp (Hexagon), NPU | 28.5 | 18.8 W | 12.1 W | 0.42 | 0.66 | ~5,400 |
 
-### Prefill (long prompt, ~2,000 tokens)
+### Prefill (long prompt, 1,641–1,882 tokens)
 
 | Model | Runtime, processor | Time to first token | Prefill power | Prefill energy (dynamic) | Prefill energy (total) |
 | --- | --- | --- | --- | --- | --- |
@@ -83,7 +83,7 @@ Speeds match 2026-10-14 within 3% (for example, 4B CPU long prompt: 30.7 s vs 31
 
 Observations:
 - **4B decode: same speed, about two-thirds of the energy on the NPU.** CPU and NPU both generate ~18 tok/s, limited by memory bandwidth, but the CPU draws 21 W against 14 W, so the NPU uses 1.5× less total energy per token (1.9× less dynamic).
-- **4B prefill: 20× less energy on the NPU.** The ~2,000-token prompt cost 27 J on the NPU against 529 J on the CPU. A full request (long prompt plus 256-token answer) comes to ~230 J on the NPU against ~820 J on the CPU, 3.6× less.
+- **4B prefill: 20× less energy on the NPU.** The 1,882-token prompt cost 27 J on the NPU against 529 J on the CPU. A full request (long prompt plus 256-token answer) comes to ~230 J on the NPU against ~820 J on the CPU, 3.6× less.
 - **Decode on the CPU draws more power than prefill on the CPU** (21 W vs 17 W), although prefill is the compute-bound phase. Memory-bound decode keeps the DDR busy, and memory traffic costs power too.
 - **0.8B: the CPU wins in decode on both speed and energy** (0.35 vs 0.66 J/token). The llama.cpp Hexagon backend draws almost as much as the CPU (18.8 W) while generating half as fast. For prefill, even this backend saves energy: 31 J against 89 J.
 - The runtime matters for energy as much as for speed: on the NPU, QAIRT ran the 4B at 14 W, while llama.cpp's Hexagon backend needed 19 W for a model five times smaller.

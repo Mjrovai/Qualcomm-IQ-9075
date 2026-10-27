@@ -34,7 +34,7 @@ T = {
         "energy_x": "Energy per inference (mJ, total, log scale)",
         "energy_title": "Energy per inference: NPU vs CPU",
         "ratio": "CPU / NPU",
-        "llm_title": "Qwen3-4B, ~2,000-token prompt: the area above idle is the energy spent",
+        "llm_title": "Qwen3-4B, 1,882-token prompt: the area above idle is the energy spent",
         "prefill": "prefill", "decode": "decode",
         "npu_llm": "NPU (QAIRT)", "cpu_llm": "CPU (llama.cpp)",
         "tok_title": "LLM decode: energy per generated token",
@@ -48,7 +48,7 @@ T = {
         "energy_x": "Energia por inferência (mJ, total, escala log)",
         "energy_title": "Energia por inferência: NPU × CPU",
         "ratio": "CPU / NPU",
-        "llm_title": "Qwen3-4B, prompt de ~2.000 tokens: a área acima do repouso é a energia gasta",
+        "llm_title": "Qwen3-4B, prompt de 1.882 tokens: a área acima do repouso é a energia gasta",
         "prefill": "prefill", "decode": "decode",
         "npu_llm": "NPU (QAIRT)", "cpu_llm": "CPU (llama.cpp)",
         "tok_title": "Decode de LLM: energia por token gerado",
@@ -276,6 +276,67 @@ def chart_tokens(lang):
     save(fig, "llm-energy-per-token", lang)
 
 
+# IQ-9075 dynamic (above idle) values from data/power/results.md, FNB58 at the barrel jack
+IQ_DYNAMIC = {
+    ("Qwen3-4B", "IQ-9075 NPU (QAIRT)"): (0.41, 15),
+    ("Qwen3-4B", "IQ-9075 CPU (llama.cpp)"): (0.79, 322),
+    ("Qwen3.5-0.8B", "IQ-9075 CPU (llama.cpp)"): (0.23, 54),
+    ("Qwen3.5-0.8B", "IQ-9075 NPU (llama.cpp Hexagon)"): (0.42, 20),
+}
+JETSON = "Jetson GPU (llama.cpp CUDA)"
+
+
+def jetson_dynamic():
+    """Mean dynamic J/token (short prompt) and prefill J (long prompt) per model, from data/jetson."""
+    out = {}
+    for name, model in (("energy-0.8b-20261027.csv", "Qwen3.5-0.8B"), ("energy-4b-20261027.csv", "Qwen3-4B")):
+        with open(os.path.join(ROOT, "data", "jetson", name)) as f:
+            rows = list(csv.DictReader(f))
+        jt = np.mean([float(r["J_per_token_dynamic"]) for r in rows if r["prompt"] == "short"])
+        pre = np.mean([float(r["prefill_J_dynamic"]) for r in rows if r["prompt"] == "long"])
+        out[(model, JETSON)] = (jt, pre)
+    return out
+
+
+def chart_jetson():
+    """IQ-9075 vs Jetson Orin Nano Super, energy above idle (English only)."""
+    vals = {**IQ_DYNAMIC, **jetson_dynamic()}
+    order = [("Qwen3-4B", "IQ-9075 NPU (QAIRT)"), ("Qwen3-4B", JETSON), ("Qwen3-4B", "IQ-9075 CPU (llama.cpp)"),
+             ("Qwen3.5-0.8B", JETSON), ("Qwen3.5-0.8B", "IQ-9075 CPU (llama.cpp)"),
+             ("Qwen3.5-0.8B", "IQ-9075 NPU (llama.cpp Hexagon)")]
+    color = lambda k: GPU if k[1] == JETSON else (NPU if "NPU" in k[1] else CPU)
+    fig, axes = plt.subplots(1, 2, figsize=(11, 4.0), dpi=200, sharey=True)
+    fig.patch.set_facecolor(SURFACE)
+    y = np.array([5.6, 4.6, 3.6, 1.8, 0.8, -0.2])
+    for ax, i, xlabel, fmt in ((axes[0], 0, "Decode energy per token, above idle (J)", "{:.2f} J"),
+                               (axes[1], 1, "Prefill energy, long prompt, above idle (J, log scale)", "{:.0f} J")):
+        style(ax)
+        for yi, k in zip(y, order):
+            v = vals[k][i]
+            ax.barh(yi, v, height=0.7, color=color(k))
+            ax.text(v * (1.06 if i else 1) + (0 if i else 0.015), yi, fmt.format(v), va="center", fontsize=9,
+                    color=INK)
+        ax.grid(axis="y", visible=False)
+        ax.tick_params(axis="y", length=0)
+        ax.set_xlabel(xlabel, color=INK2, fontsize=9)
+        if i:
+            ax.set_xscale("log")
+            ax.set_xlim(4, 1000)
+            ax.set_xticks([5, 10, 20, 50, 100, 200, 500], ["5", "10", "20", "50", "100", "200", "500"])
+            ax.minorticks_off()
+        else:
+            ax.set_xlim(0, 1.0)
+    axes[0].set_yticks(y, [k[1] for k in order])
+    axes[0].tick_params(axis="y", length=0, labelcolor=INK, labelsize=9)
+    for yy, model in ((6.35, "Qwen3-4B"), (2.55, "Qwen3.5-0.8B")):
+        axes[0].text(-0.02, yy, model, transform=axes[0].get_yaxis_transform(), ha="right", va="center",
+                     fontsize=9.5, color=INK, fontweight="bold")
+    fig.suptitle("Energy above idle: IQ-9075 (meter at the barrel jack) vs Jetson Orin Nano Super "
+                 "(on-board module sensor)", x=0.01, ha="left", fontsize=11, color=INK)
+    fig.tight_layout()
+    save(fig, "jetson-vs-iq9075", "en")
+
+
 def main():
     os.makedirs(OUT, exist_ok=True)
     plt.rcParams["font.family"] = ["Helvetica Neue", "Helvetica", "Arial", "DejaVu Sans"]
@@ -284,6 +345,7 @@ def main():
         chart_energy(lang)
         chart_llm_trace(lang)
         chart_tokens(lang)
+    chart_jetson()
 
 
 if __name__ == "__main__":
