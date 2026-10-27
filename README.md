@@ -45,7 +45,7 @@ The IQ-9075 doesn't compete on raw power with NVIDIA's top line; its edge is a d
 |  | Arduino UNO Q | Arduino VENTUNO Q | Raspberry Pi 5 | Jetson Orin Nano Super | Jetson AGX Orin 64GB | IQ-9075 EVK |
 | --- | --- | --- | --- | --- | --- | --- |
 | Class | SBC + MCU, education | SBC + MCU, AI and robotics | general-purpose SBC | entry Edge AI | high-end Edge AI | industrial Edge AI |
-| CPU | 4× A53 (QRB2210) + STM32U585 | 8× Kryo Gen 6 (IQ-8275) + STM32H5F5 | 4× A76 | 6× A78AE | 12× A78AE | 8× Kryo Gen 6 |
+| CPU | 4× A53 (QRB2210) + STM32U585 | 8× Kryo Gen 6 (4 performance + 4 efficiency, IQ-8275) + STM32H5F5 | 4× A76 | 6× A78AE | 12× A78AE | 8× Kryo Gen 6 |
 | AI accelerator | no dedicated NPU | Hexagon NPU | none (Hailo via AI HAT+) | Ampere GPU | Ampere GPU + DLA | Hexagon NPU |
 | Stated AI (INT8) | — | 40 dense TOPS | 13–26 TOPS with HAT | \~67 sparse TOPS | \~275 sparse TOPS | 100 dense / 200 sparse |
 | RAM | 2–4 GB | 16 GB | up to 16 GB | 8 GB | 64 GB | 36 GB with ECC |
@@ -54,7 +54,7 @@ The IQ-9075 doesn't compete on raw power with NVIDIA's top line; its edge is a d
 
 Two caveats. NVIDIA quotes sparse TOPS while Qualcomm highlights dense ones; on a sparse basis, the IQ-9075 sits between the Orin Nano and the AGX Orin. And for LLMs, what matters is memory bandwidth: about 77 GB/s on the IQ-9075 versus about 205 GB/s on the AGX Orin.
 
-There is also a teaching continuity: the Arduino UNO Q uses an entry-level Dragonwing (QRB2210), and the Arduino VENTUNO Q steps up to a Dragonwing IQ8 (IQ-8275), a smaller sibling of the IQ-9075 with the same Kryo Gen 6 CPU family and a Hexagon NPU. The same software ecosystem spans from the lab kit to the industrial board.
+There is also a teaching continuity: the Arduino UNO Q uses an entry-level Dragonwing (QRB2210), and the Arduino VENTUNO Q steps up to a Dragonwing IQ8 (IQ-8275), a smaller sibling of the IQ-9075 with fewer performance cores, 40 TOPS instead of 100, and 16 GB of RAM. The same software ecosystem spans from the lab kit to the industrial board.
 
 ## First contact: the factory image
 
