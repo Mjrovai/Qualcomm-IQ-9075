@@ -1,0 +1,103 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1090 650" width="1090" height="650">
+<defs>
+<marker id="a52514e" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="11" markerHeight="11" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#52514e"/></marker>
+<marker id="aeb6834" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="11" markerHeight="11" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#eb6834"/></marker>
+<marker id="a1baf7a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="11" markerHeight="11" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1baf7a"/></marker>
+<marker id="a2a78d6" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="11" markerHeight="11" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2a78d6"/></marker>
+</defs>
+<rect width="1090" height="650" fill="#fcfcfb"/>
+<rect x="385" y="48" width="690" height="345" rx="12" fill="#f1f0ec" stroke="#52514e" stroke-width="1.2" stroke-dasharray="6 4"/>
+<text x="400" y="36" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="11.5" fill="#52514e" font-weight="normal" font-style="italic" text-anchor="start">GenieX container: docker --privileged, host /usr/lib mounted read-only at /opt/qcom-lib</text>
+<text x="195.0" y="70" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="12" fill="#8a8984" font-weight="bold" font-style="normal" text-anchor="middle">TFLITE (VISION)</text>
+<text x="520.0" y="70" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="12" fill="#8a8984" font-weight="bold" font-style="normal" text-anchor="middle">GENIEX · QAIRT</text>
+<text x="870.0" y="70" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="12" fill="#8a8984" font-weight="bold" font-style="normal" text-anchor="middle">GENIEX · LLAMA.CPP</text>
+<rect x="30" y="82" width="330" height="74" rx="7" fill="#ffffff" stroke="#c9c8c3" stroke-width="1.5"/>
+<text x="195.0" y="105.0" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="13" fill="#0b0b0b" font-weight="bold" font-style="normal" text-anchor="middle">benchmark_model</text>
+<text x="195.0" y="123.0" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="11.5" fill="#52514e" font-weight="normal" font-style="normal" text-anchor="middle">gst-ai-* apps</text>
+<text x="195.0" y="141.0" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="11.5" fill="#52514e" font-weight="normal" font-style="normal" text-anchor="middle">.tflite INT8 models</text>
+<rect x="30" y="186" width="330" height="50" rx="7" fill="#ffffff" stroke="#c9c8c3" stroke-width="1.5"/>
+<text x="195.0" y="215.0" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="13" fill="#0b0b0b" font-weight="bold" font-style="normal" text-anchor="middle">TensorFlow Lite</text>
+<path d="M195.0,159 L195.0,183" fill="none" stroke="#52514e" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#a52514e)"/>
+<rect x="400" y="82" width="240" height="74" rx="7" fill="#ffffff" stroke="#c9c8c3" stroke-width="1.5"/>
+<text x="520.0" y="105.0" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="13" fill="#0b0b0b" font-weight="bold" font-style="normal" text-anchor="middle">geniex infer</text>
+<text x="520.0" y="123.0" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="11.5" fill="#52514e" font-weight="normal" font-style="normal" text-anchor="middle">qualcomm/Qwen3-4B</text>
+<text x="520.0" y="141.0" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="11.5" fill="#52514e" font-weight="normal" font-style="normal" text-anchor="middle">W4A16 bundle, AI Hub</text>
+<rect x="400" y="186" width="240" height="50" rx="7" fill="#ffffff" stroke="#c9c8c3" stroke-width="1.5"/>
+<text x="520.0" y="215.0" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="13" fill="#0b0b0b" font-weight="bold" font-style="normal" text-anchor="middle">QAIRT (Genie)</text>
+<path d="M520.0,159 L520.0,183" fill="none" stroke="#52514e" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#a52514e)"/>
+<rect x="680" y="82" width="380" height="74" rx="7" fill="#ffffff" stroke="#c9c8c3" stroke-width="1.5"/>
+<text x="870.0" y="105.0" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="13" fill="#0b0b0b" font-weight="bold" font-style="normal" text-anchor="middle">geniex infer</text>
+<text x="870.0" y="123.0" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="11.5" fill="#52514e" font-weight="normal" font-style="normal" text-anchor="middle">unsloth/…-GGUF</text>
+<text x="870.0" y="141.0" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="11.5" fill="#52514e" font-weight="normal" font-style="normal" text-anchor="middle">Q4_0, Hugging Face</text>
+<rect x="680" y="186" width="380" height="50" rx="7" fill="#ffffff" stroke="#c9c8c3" stroke-width="1.5"/>
+<text x="870.0" y="215.0" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="13" fill="#0b0b0b" font-weight="bold" font-style="normal" text-anchor="middle">llama.cpp</text>
+<path d="M870.0,159 L870.0,183" fill="none" stroke="#52514e" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#a52514e)"/>
+<rect x="30.0" y="272" width="102.0" height="80" rx="7" fill="#ffffff" stroke="#c9c8c3" stroke-width="1.5"/>
+<text x="81.0" y="307.0" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="13" fill="#0b0b0b" font-weight="bold" font-style="normal" text-anchor="middle">XNNPACK</text>
+<text x="81.0" y="325.0" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="11.5" fill="#52514e" font-weight="normal" font-style="normal" text-anchor="middle">8 threads</text>
+<path d="M195.0,236 L195.0,252 L81.0,252 L81.0,269" fill="none" stroke="#52514e" stroke-width="1.4" stroke-linejoin="round"/>
+<rect x="144.0" y="272" width="102.0" height="80" rx="7" fill="#ffffff" stroke="#c9c8c3" stroke-width="1.5"/>
+<text x="195.0" y="307.0" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="13" fill="#0b0b0b" font-weight="bold" font-style="normal" text-anchor="middle">GPU delegate</text>
+<text x="195.0" y="325.0" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="11.5" fill="#52514e" font-weight="normal" font-style="normal" text-anchor="middle">FP16/FP32</text>
+<path d="M195.0,236 L195.0,252 L195.0,252 L195.0,269" fill="none" stroke="#52514e" stroke-width="1.4" stroke-linejoin="round"/>
+<rect x="258.0" y="272" width="102.0" height="80" rx="7" fill="#ffffff" stroke="#c9c8c3" stroke-width="1.5"/>
+<text x="309.0" y="307.0" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="13" fill="#0b0b0b" font-weight="bold" font-style="normal" text-anchor="middle">QNN delegate</text>
+<text x="309.0" y="325.0" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="11.5" fill="#52514e" font-weight="normal" font-style="normal" text-anchor="middle">libQnnHtp</text>
+<path d="M195.0,236 L195.0,252 L309.0,252 L309.0,269" fill="none" stroke="#52514e" stroke-width="1.4" stroke-linejoin="round"/>
+<rect x="400.0" y="272" width="240.0" height="80" rx="7" fill="#ffffff" stroke="#c9c8c3" stroke-width="1.5"/>
+<text x="520.0" y="307.0" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="13" fill="#0b0b0b" font-weight="bold" font-style="normal" text-anchor="middle">QNN HTP</text>
+<text x="520.0" y="325.0" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="11.5" fill="#52514e" font-weight="normal" font-style="normal" text-anchor="middle">precompiled graph</text>
+<path d="M520.0,236 L520.0,252 L520.0,252 L520.0,269" fill="none" stroke="#52514e" stroke-width="1.4" stroke-linejoin="round"/>
+<rect x="680.0" y="272" width="118.66666666666667" height="80" rx="7" fill="#ffffff" stroke="#c9c8c3" stroke-width="1.5"/>
+<text x="739.3333333333334" y="307.0" font-family="Menlo, Consolas, monospace" font-size="13" fill="#0b0b0b" font-weight="bold" font-style="normal" text-anchor="middle">-c cpu</text>
+<text x="739.3333333333334" y="325.0" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="11.5" fill="#52514e" font-weight="normal" font-style="normal" text-anchor="middle">CPU kernels</text>
+<path d="M870.0,236 L870.0,252 L739.3333333333334,252 L739.3333333333334,269" fill="none" stroke="#52514e" stroke-width="1.4" stroke-linejoin="round"/>
+<rect x="810.6666666666667" y="272" width="118.66666666666667" height="80" rx="7" fill="#ffffff" stroke="#c9c8c3" stroke-width="1.5" stroke-dasharray="5 4"/>
+<text x="870.0000000000001" y="298.0" font-family="Menlo, Consolas, monospace" font-size="13" fill="#0b0b0b" font-weight="bold" font-style="normal" text-anchor="middle">-c gpu</text>
+<text x="870.0000000000001" y="316.0" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="11.5" fill="#52514e" font-weight="normal" font-style="normal" text-anchor="middle">OpenCL</text>
+<text x="870.0000000000001" y="334.0" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="11.5" fill="#52514e" font-weight="normal" font-style="normal" text-anchor="middle">rejected by driver</text>
+<path d="M870.0,236 L870.0,252 L870.0000000000001,252 L870.0000000000001,269" fill="none" stroke="#52514e" stroke-width="1.4" stroke-linejoin="round"/>
+<rect x="941.3333333333334" y="272" width="118.66666666666667" height="80" rx="7" fill="#ffffff" stroke="#c9c8c3" stroke-width="1.5"/>
+<text x="1000.6666666666667" y="298.0" font-family="Menlo, Consolas, monospace" font-size="13" fill="#0b0b0b" font-weight="bold" font-style="normal" text-anchor="middle">-c npu</text>
+<text x="1000.6666666666667" y="316.0" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="11.5" fill="#52514e" font-weight="normal" font-style="normal" text-anchor="middle">Hexagon backend</text>
+<text x="1000.6666666666667" y="334.0" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="11.5" fill="#52514e" font-weight="normal" font-style="normal" text-anchor="middle">0.8B ok, 4B failed</text>
+<path d="M870.0,236 L870.0,252 L1000.6666666666667,252 L1000.6666666666667,269" fill="none" stroke="#52514e" stroke-width="1.4" stroke-linejoin="round"/>
+<path d="M309.0,412 L1000.6666666666667,412" fill="none" stroke="#fcfcfb" stroke-width="7.2" stroke-linejoin="round"/>
+<path d="M309.0,412 L1000.6666666666667,412" fill="none" stroke="#2a78d6" stroke-width="2.2" stroke-linejoin="round"/>
+<path d="M195.0,432 L870.0000000000001,432" fill="none" stroke="#fcfcfb" stroke-width="7.2" stroke-linejoin="round"/>
+<path d="M195.0,432 L870.0000000000001,432" fill="none" stroke="#1baf7a" stroke-width="2.2" stroke-linejoin="round"/>
+<path d="M81.0,452 L739.3333333333334,452" fill="none" stroke="#fcfcfb" stroke-width="7.2" stroke-linejoin="round"/>
+<path d="M81.0,452 L739.3333333333334,452" fill="none" stroke="#eb6834" stroke-width="2.2" stroke-linejoin="round"/>
+<path d="M81.0,352 L81.0,452" fill="none" stroke="#fcfcfb" stroke-width="7.2" stroke-linejoin="round"/>
+<path d="M81.0,352 L81.0,452" fill="none" stroke="#eb6834" stroke-width="2.2" stroke-linejoin="round"/>
+<path d="M195.0,352 L195.0,432" fill="none" stroke="#fcfcfb" stroke-width="7.2" stroke-linejoin="round"/>
+<path d="M195.0,352 L195.0,432" fill="none" stroke="#1baf7a" stroke-width="2.2" stroke-linejoin="round"/>
+<path d="M309.0,352 L309.0,412" fill="none" stroke="#fcfcfb" stroke-width="7.2" stroke-linejoin="round"/>
+<path d="M309.0,352 L309.0,412" fill="none" stroke="#2a78d6" stroke-width="2.2" stroke-linejoin="round"/>
+<path d="M520.0,352 L520.0,412" fill="none" stroke="#fcfcfb" stroke-width="7.2" stroke-linejoin="round"/>
+<path d="M520.0,352 L520.0,412" fill="none" stroke="#2a78d6" stroke-width="2.2" stroke-linejoin="round"/>
+<path d="M739.3333333333334,352 L739.3333333333334,452" fill="none" stroke="#fcfcfb" stroke-width="7.2" stroke-linejoin="round"/>
+<path d="M739.3333333333334,352 L739.3333333333334,452" fill="none" stroke="#eb6834" stroke-width="2.2" stroke-linejoin="round"/>
+<path d="M870.0000000000001,352 L870.0000000000001,432" fill="none" stroke="#fcfcfb" stroke-width="7.2" stroke-linejoin="round"/>
+<path d="M870.0000000000001,352 L870.0000000000001,432" fill="none" stroke="#1baf7a" stroke-width="2.2" stroke-dasharray="5 4" stroke-linejoin="round"/>
+<path d="M1000.6666666666667,352 L1000.6666666666667,412" fill="none" stroke="#fcfcfb" stroke-width="7.2" stroke-linejoin="round"/>
+<path d="M1000.6666666666667,352 L1000.6666666666667,412" fill="none" stroke="#2a78d6" stroke-width="2.2" stroke-linejoin="round"/>
+<path d="M180,452 L180,475" fill="none" stroke="#eb6834" stroke-width="2.2" stroke-linejoin="round" marker-end="url(#aeb6834)"/>
+<rect x="30" y="478" width="300" height="66" rx="8" fill="#ffffff" stroke="#eb6834" stroke-width="2"/>
+<text x="180.0" y="507" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="15" fill="#0b0b0b" font-weight="bold" font-style="normal" text-anchor="middle">CPU</text>
+<text x="180.0" y="528" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="12" fill="#52514e" font-weight="normal" font-style="normal" text-anchor="middle">8× Kryo Gen 6</text>
+<path d="M470,432 L470,475" fill="none" stroke="#1baf7a" stroke-width="2.2" stroke-linejoin="round" marker-end="url(#a1baf7a)"/>
+<rect x="400" y="478" width="240" height="66" rx="8" fill="#ffffff" stroke="#1baf7a" stroke-width="2"/>
+<text x="520.0" y="507" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="15" fill="#0b0b0b" font-weight="bold" font-style="normal" text-anchor="middle">GPU</text>
+<text x="520.0" y="528" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="12" fill="#52514e" font-weight="normal" font-style="normal" text-anchor="middle">Adreno 663</text>
+<path d="M880,412 L880,475" fill="none" stroke="#2a78d6" stroke-width="2.2" stroke-linejoin="round" marker-end="url(#a2a78d6)"/>
+<rect x="700" y="478" width="360" height="66" rx="8" fill="#ffffff" stroke="#2a78d6" stroke-width="2"/>
+<text x="880.0" y="507" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="15" fill="#0b0b0b" font-weight="bold" font-style="normal" text-anchor="middle">NPU</text>
+<text x="880.0" y="528" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="12" fill="#52514e" font-weight="normal" font-style="normal" text-anchor="middle">Hexagon HTP V73</text>
+<text x="890" y="468" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="11.5" fill="#52514e" font-weight="normal" font-style="italic" text-anchor="start">FastRPC</text>
+<path d="M180.0,544 L180.0,586" stroke="#c9c8c3" stroke-width="3"/>
+<path d="M520.0,544 L520.0,586" stroke="#c9c8c3" stroke-width="3"/>
+<path d="M880.0,544 L880.0,586" stroke="#c9c8c3" stroke-width="3"/>
+<rect x="30" y="586" width="1030" height="40" rx="8" fill="#f1f0ec" stroke="#52514e" stroke-width="1.2"/>
+<text x="545.0" y="611" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="13" fill="#0b0b0b" font-weight="bold" font-style="normal" text-anchor="middle">LPDDR5, 36 GB, ~77 GB/s, shared by every processor</text>
+</svg>

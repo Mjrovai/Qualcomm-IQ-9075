@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1070 640" width="1070" height="640">
+<defs>
+<marker id="a0b0b0b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="11" markerHeight="11" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#0b0b0b"/></marker>
+<marker id="a2a78d6" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="11" markerHeight="11" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2a78d6"/></marker>
+<marker id="a52514e" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="11" markerHeight="11" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#52514e"/></marker>
+</defs>
+<rect width="1070" height="640" fill="#fcfcfb"/>
+<text x="30" y="38" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="12" fill="#8a8984" font-weight="bold" font-style="normal" text-anchor="start">POWER PATH</text>
+<rect x="30" y="56" width="190" height="88" rx="8" fill="#ffffff" stroke="#c9c8c3" stroke-width="1.5"/>
+<text x="125.0" y="95.0" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="15" fill="#0b0b0b" font-weight="bold" font-style="normal" text-anchor="middle">USB-C PD charger</text>
+<text x="125.0" y="116.0" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="12.5" fill="#52514e" font-weight="normal" font-style="normal" text-anchor="middle">65–100 W</text>
+<rect x="305" y="56" width="190" height="88" rx="8" fill="#ffffff" stroke="#c9c8c3" stroke-width="1.5"/>
+<text x="400.0" y="95.0" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="15" fill="#0b0b0b" font-weight="bold" font-style="normal" text-anchor="middle">FNIRSI FNB58</text>
+<text x="400.0" y="116.0" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="12.5" fill="#52514e" font-weight="normal" font-style="normal" text-anchor="middle">USB meter, V and I</text>
+<rect x="580" y="56" width="190" height="88" rx="8" fill="#ffffff" stroke="#c9c8c3" stroke-width="1.5"/>
+<text x="675.0" y="95.0" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="15" fill="#0b0b0b" font-weight="bold" font-style="normal" text-anchor="middle">PD trigger cable</text>
+<text x="675.0" y="116.0" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="12.5" fill="#52514e" font-weight="normal" font-style="normal" text-anchor="middle">USB-C → barrel, 20 V</text>
+<rect x="855" y="56" width="190" height="88" rx="8" fill="#ffffff" stroke="#0b0b0b" stroke-width="1.5"/>
+<text x="950.0" y="95.0" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="15" fill="#0b0b0b" font-weight="bold" font-style="normal" text-anchor="middle">IQ-9075 EVK</text>
+<text x="950.0" y="116.0" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="12.5" fill="#52514e" font-weight="normal" font-style="normal" text-anchor="middle">barrel input, 12–36 V</text>
+<path d="M224,100.0 L301,100.0" fill="none" stroke="#0b0b0b" stroke-width="3" stroke-linejoin="round" marker-end="url(#a0b0b0b)"/>
+<text x="262.5" y="86.0" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="12" fill="#52514e" font-weight="normal" font-style="normal" text-anchor="middle">USB-C</text>
+<path d="M499,100.0 L576,100.0" fill="none" stroke="#0b0b0b" stroke-width="3" stroke-linejoin="round" marker-end="url(#a0b0b0b)"/>
+<text x="537.5" y="86.0" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="12" fill="#52514e" font-weight="normal" font-style="normal" text-anchor="middle">USB-C</text>
+<path d="M774,100.0 L851,100.0" fill="none" stroke="#0b0b0b" stroke-width="3" stroke-linejoin="round" marker-end="url(#a0b0b0b)"/>
+<text x="812.5" y="86.0" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="12" fill="#52514e" font-weight="normal" font-style="normal" text-anchor="middle">barrel</text>
+<text x="305" y="38" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="12.5" fill="#52514e" font-weight="normal" font-style="italic" text-anchor="start">Connect the data cable last: the FNB58 must power up from the charger, or PD stays at 5 V.</text>
+<rect x="30" y="228" width="730" height="392" rx="12" fill="#f1f0ec" stroke="#c9c8c3" stroke-width="1.5"/>
+<text x="48" y="256" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="12" fill="#8a8984" font-weight="bold" font-style="normal" text-anchor="start">MAC</text>
+<rect x="60" y="290" width="300" height="100" rx="8" fill="#ffffff" stroke="#c9c8c3" stroke-width="1.5"/>
+<text x="210.0" y="325.0" font-family="Menlo, Consolas, monospace" font-size="15" fill="#0b0b0b" font-weight="bold" font-style="normal" text-anchor="middle">fnb58_log.py</text>
+<text x="210.0" y="346.0" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="12.5" fill="#52514e" font-weight="normal" font-style="normal" text-anchor="middle">one long session</text>
+<text x="210.0" y="367.0" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="12.5" fill="#52514e" font-weight="normal" font-style="normal" text-anchor="middle">→ session.csv</text>
+<rect x="430" y="290" width="300" height="100" rx="8" fill="#ffffff" stroke="#c9c8c3" stroke-width="1.5"/>
+<text x="580.0" y="325.0" font-family="Menlo, Consolas, monospace" font-size="15" fill="#0b0b0b" font-weight="bold" font-style="normal" text-anchor="middle">power_bench.py run</text>
+<text x="580.0" y="346.0" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="12.5" fill="#52514e" font-weight="normal" font-style="normal" text-anchor="middle">plan of phases, idle between</text>
+<text x="580.0" y="367.0" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="12.5" fill="#52514e" font-weight="normal" font-style="normal" text-anchor="middle">→ markers.csv (start, end)</text>
+<rect x="260" y="440" width="400" height="120" rx="8" fill="#ffffff" stroke="#0b0b0b" stroke-width="1.5"/>
+<text x="460.0" y="468" font-family="Menlo, Consolas, monospace" font-size="15" fill="#0b0b0b" font-weight="bold" font-style="normal" text-anchor="middle">power_bench.py report</text>
+<text x="460.0" y="492" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="12.5" fill="#52514e" font-weight="normal" font-style="normal" text-anchor="middle">mean power in each steady window</text>
+<text x="460.0" y="518" font-family="Menlo, Consolas, monospace" font-size="13" fill="#0b0b0b" font-weight="normal" font-style="normal" text-anchor="middle">E = P × t  dynamic: (P − P_idle) × t</text>
+<text x="460.0" y="544" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="12.5" fill="#52514e" font-weight="bold" font-style="normal" text-anchor="middle">mJ per inference, J per token</text>
+<path d="M400.0,148 L400.0,205 L210.0,205 L210.0,286" fill="none" stroke="#2a78d6" stroke-width="2" stroke-dasharray="6 4" stroke-linejoin="round" marker-end="url(#a2a78d6)"/>
+<text x="410.0" y="192" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="12" fill="#2a78d6" font-weight="normal" font-style="normal" text-anchor="start">data port (HID), 100 samples/s</text>
+<path d="M734,340.0 L950.0,340.0 L950.0,148" fill="none" stroke="#52514e" stroke-width="2" stroke-dasharray="3 4" stroke-linejoin="round" marker-end="url(#a52514e)" marker-start="url(#a52514e)"/>
+<text x="855.0" y="310.0" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="12.5" fill="#52514e" font-weight="bold" font-style="normal" text-anchor="middle">SSH over Wi-Fi</text>
+<text x="855.0" y="328.0" font-family="Menlo, Consolas, monospace" font-size="11.5" fill="#52514e" font-weight="normal" font-style="normal" text-anchor="middle">benchmark_model, geniex</text>
+<path d="M210.0,394 L210.0,500.0 L256,500.0" fill="none" stroke="#52514e" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#a52514e)"/>
+<path d="M580.0,394 L580.0,436" fill="none" stroke="#52514e" stroke-width="1.6" stroke-linejoin="round" marker-end="url(#a52514e)"/>
+<text x="742" y="604" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="12" fill="#52514e" font-weight="normal" font-style="italic" text-anchor="end">Same clock for samples and markers</text>
+</svg>

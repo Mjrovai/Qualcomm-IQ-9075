@@ -1,0 +1,18 @@
+# label | seconds (idle only) | remote command; GenieX LLM energy, short and long prompts
+idle-00 | 30 |
+qwen3-4b-npu-qairt-short | 0 | docker run --rm --privileged -e GENIEX_DATADIR=/data -v /root/geniex-data:/data -v /usr/lib:/opt/qcom-lib:ro docker.io/qualcomm/geniex:latest sh -c 'geniex infer qualcomm/Qwen3-4B  --think=false --seed 42 --max-tokens 256 -p "Explique em três parágrafos o que é TinyML" < /dev/null 2>&1 | tail -3; echo GEN_END=$(date +%s.%N)'
+idle-01 | 20 |
+qwen3-4b-npu-qairt-long | 0 | docker run --rm --privileged -e GENIEX_DATADIR=/data -v /root/geniex-data:/data -v /usr/lib:/opt/qcom-lib:ro docker.io/qualcomm/geniex:latest sh -c 'geniex infer qualcomm/Qwen3-4B  --think=false --seed 42 --max-tokens 256 -i /data/longo.txt < /dev/null 2>&1 | tail -3; echo GEN_END=$(date +%s.%N)'
+idle-02 | 20 |
+qwen3-4b-cpu-llamacpp-short | 0 | docker run --rm --privileged -e GENIEX_DATADIR=/data -v /root/geniex-data:/data -v /usr/lib:/opt/qcom-lib:ro docker.io/qualcomm/geniex:latest sh -c 'geniex infer unsloth/Qwen3-4B-GGUF -c cpu --think=false --seed 42 --max-tokens 256 -p "Explique em três parágrafos o que é TinyML" < /dev/null 2>&1 | tail -3; echo GEN_END=$(date +%s.%N)'
+idle-03 | 20 |
+qwen3-4b-cpu-llamacpp-long | 0 | docker run --rm --privileged -e GENIEX_DATADIR=/data -v /root/geniex-data:/data -v /usr/lib:/opt/qcom-lib:ro docker.io/qualcomm/geniex:latest sh -c 'geniex infer unsloth/Qwen3-4B-GGUF -c cpu --think=false --seed 42 --max-tokens 256 -i /data/longo.txt < /dev/null 2>&1 | tail -3; echo GEN_END=$(date +%s.%N)'
+idle-04 | 20 |
+qwen3.5-0.8b-cpu-llamacpp-short | 0 | docker run --rm --privileged -e GENIEX_DATADIR=/data -v /root/geniex-data:/data -v /usr/lib:/opt/qcom-lib:ro docker.io/qualcomm/geniex:latest sh -c 'geniex infer unsloth/Qwen3.5-0.8B-GGUF -c cpu --think=false --seed 42 --max-tokens 256 -p "Explique em três parágrafos o que é TinyML" < /dev/null 2>&1 | tail -3; echo GEN_END=$(date +%s.%N)'
+idle-05 | 20 |
+qwen3.5-0.8b-cpu-llamacpp-long | 0 | docker run --rm --privileged -e GENIEX_DATADIR=/data -v /root/geniex-data:/data -v /usr/lib:/opt/qcom-lib:ro docker.io/qualcomm/geniex:latest sh -c 'geniex infer unsloth/Qwen3.5-0.8B-GGUF -c cpu --think=false --seed 42 --max-tokens 256 -i /data/longo.txt < /dev/null 2>&1 | tail -3; echo GEN_END=$(date +%s.%N)'
+idle-06 | 20 |
+qwen3.5-0.8b-npu-llamacpp-short | 0 | docker run --rm --privileged -e GENIEX_DATADIR=/data -v /root/geniex-data:/data -v /usr/lib:/opt/qcom-lib:ro docker.io/qualcomm/geniex:latest sh -c 'geniex infer unsloth/Qwen3.5-0.8B-GGUF -c npu --think=false --seed 42 --max-tokens 256 -p "Explique em três parágrafos o que é TinyML" < /dev/null 2>&1 | tail -3; echo GEN_END=$(date +%s.%N)'
+idle-07 | 20 |
+qwen3.5-0.8b-npu-llamacpp-long | 0 | docker run --rm --privileged -e GENIEX_DATADIR=/data -v /root/geniex-data:/data -v /usr/lib:/opt/qcom-lib:ro docker.io/qualcomm/geniex:latest sh -c 'geniex infer unsloth/Qwen3.5-0.8B-GGUF -c npu --think=false --seed 42 --max-tokens 256 -i /data/longo.txt < /dev/null 2>&1 | tail -3; echo GEN_END=$(date +%s.%N)'
+idle-08 | 20 |

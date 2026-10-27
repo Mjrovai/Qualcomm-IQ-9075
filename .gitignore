@@ -1,0 +1,13 @@
+# Published: README.md (tutorial), figures/ (EN), tools/, data/power/, iq-9075-tutorial.pdf
+# Local only: Portuguese version, Word files, Oct 14 PDFs, Qualcomm source SVGs
+iq-9075.md
+*.docx
+iq-9075-en.pdf
+iq-9075.pdf
+iq-9075-*2026-*.pdf
+source/
+figures/*-pt.*
+tools/fnb58/fnirsi_logger.py
+.venv/
+__pycache__/
+.DS_Store

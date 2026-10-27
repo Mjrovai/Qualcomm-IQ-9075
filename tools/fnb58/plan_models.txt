@@ -1,0 +1,44 @@
+# label | seconds | remote command; 10 models NPU vs CPU, GPU for inception
+idle-00 | 30 |
+face_attrib_net-npu | 30 | export ADSP_LIBRARY_PATH=/usr/lib/rfsa/adsp; benchmark_model --graph=/etc/models/face_attrib_net_quantized.tflite --external_delegate_path=/usr/lib/libQnnTFLiteDelegate.so --external_delegate_options='backend_type:htp;library_path:/usr/lib/libQnnHtp.so;skel_library_dir:/usr/lib/rfsa/adsp;htp_performance_mode:2' --num_runs=1 --min_secs={secs} --max_secs={secs} 2>&1
+idle-01 | 20 |
+face_attrib_net-cpu8 | 30 | benchmark_model --graph=/etc/models/face_attrib_net_quantized.tflite --num_threads=8 --num_runs=1 --min_secs={secs} --max_secs={secs} 2>&1
+idle-02 | 20 |
+inception_v3-npu | 30 | export ADSP_LIBRARY_PATH=/usr/lib/rfsa/adsp; benchmark_model --graph=/etc/models/inception_v3_quantized.tflite --external_delegate_path=/usr/lib/libQnnTFLiteDelegate.so --external_delegate_options='backend_type:htp;library_path:/usr/lib/libQnnHtp.so;skel_library_dir:/usr/lib/rfsa/adsp;htp_performance_mode:2' --num_runs=1 --min_secs={secs} --max_secs={secs} 2>&1
+idle-03 | 20 |
+inception_v3-cpu8 | 30 | benchmark_model --graph=/etc/models/inception_v3_quantized.tflite --num_threads=8 --num_runs=1 --min_secs={secs} --max_secs={secs} 2>&1
+idle-04 | 20 |
+inception_v3-gpu | 30 | benchmark_model --graph=/etc/models/inception_v3_quantized.tflite --use_gpu=true --num_runs=1 --min_secs={secs} --max_secs={secs} 2>&1
+idle-05 | 20 |
+hrnet_pose-npu | 30 | export ADSP_LIBRARY_PATH=/usr/lib/rfsa/adsp; benchmark_model --graph=/etc/models/hrnet_pose_quantized.tflite --external_delegate_path=/usr/lib/libQnnTFLiteDelegate.so --external_delegate_options='backend_type:htp;library_path:/usr/lib/libQnnHtp.so;skel_library_dir:/usr/lib/rfsa/adsp;htp_performance_mode:2' --num_runs=1 --min_secs={secs} --max_secs={secs} 2>&1
+idle-06 | 20 |
+hrnet_pose-cpu8 | 30 | benchmark_model --graph=/etc/models/hrnet_pose_quantized.tflite --num_threads=8 --num_runs=1 --min_secs={secs} --max_secs={secs} 2>&1
+idle-07 | 20 |
+midas-npu | 30 | export ADSP_LIBRARY_PATH=/usr/lib/rfsa/adsp; benchmark_model --graph=/etc/models/midas_quantized.tflite --external_delegate_path=/usr/lib/libQnnTFLiteDelegate.so --external_delegate_options='backend_type:htp;library_path:/usr/lib/libQnnHtp.so;skel_library_dir:/usr/lib/rfsa/adsp;htp_performance_mode:2' --num_runs=1 --min_secs={secs} --max_secs={secs} 2>&1
+idle-08 | 20 |
+midas-cpu8 | 30 | benchmark_model --graph=/etc/models/midas_quantized.tflite --num_threads=8 --num_runs=1 --min_secs={secs} --max_secs={secs} 2>&1
+idle-09 | 20 |
+deeplabv3_plus_mobilenet-npu | 30 | export ADSP_LIBRARY_PATH=/usr/lib/rfsa/adsp; benchmark_model --graph=/etc/models/deeplabv3_plus_mobilenet_quantized.tflite --external_delegate_path=/usr/lib/libQnnTFLiteDelegate.so --external_delegate_options='backend_type:htp;library_path:/usr/lib/libQnnHtp.so;skel_library_dir:/usr/lib/rfsa/adsp;htp_performance_mode:2' --num_runs=1 --min_secs={secs} --max_secs={secs} 2>&1
+idle-10 | 20 |
+deeplabv3_plus_mobilenet-cpu8 | 30 | benchmark_model --graph=/etc/models/deeplabv3_plus_mobilenet_quantized.tflite --num_threads=8 --num_runs=1 --min_secs={secs} --max_secs={secs} 2>&1
+idle-11 | 20 |
+yolox-npu | 30 | export ADSP_LIBRARY_PATH=/usr/lib/rfsa/adsp; benchmark_model --graph=/etc/models/yolox_quantized.tflite --external_delegate_path=/usr/lib/libQnnTFLiteDelegate.so --external_delegate_options='backend_type:htp;library_path:/usr/lib/libQnnHtp.so;skel_library_dir:/usr/lib/rfsa/adsp;htp_performance_mode:2' --num_runs=1 --min_secs={secs} --max_secs={secs} 2>&1
+idle-12 | 20 |
+yolox-cpu8 | 30 | benchmark_model --graph=/etc/models/yolox_quantized.tflite --num_threads=8 --num_runs=1 --min_secs={secs} --max_secs={secs} 2>&1
+idle-13 | 20 |
+face_det_lite-npu | 30 | export ADSP_LIBRARY_PATH=/usr/lib/rfsa/adsp; benchmark_model --graph=/etc/models/face_det_lite_quantized.tflite --external_delegate_path=/usr/lib/libQnnTFLiteDelegate.so --external_delegate_options='backend_type:htp;library_path:/usr/lib/libQnnHtp.so;skel_library_dir:/usr/lib/rfsa/adsp;htp_performance_mode:2' --num_runs=1 --min_secs={secs} --max_secs={secs} 2>&1
+idle-14 | 20 |
+face_det_lite-cpu8 | 30 | benchmark_model --graph=/etc/models/face_det_lite_quantized.tflite --num_threads=8 --num_runs=1 --min_secs={secs} --max_secs={secs} 2>&1
+idle-15 | 20 |
+facemap_3dmm-npu | 30 | export ADSP_LIBRARY_PATH=/usr/lib/rfsa/adsp; benchmark_model --graph=/etc/models/facemap_3dmm_quantized.tflite --external_delegate_path=/usr/lib/libQnnTFLiteDelegate.so --external_delegate_options='backend_type:htp;library_path:/usr/lib/libQnnHtp.so;skel_library_dir:/usr/lib/rfsa/adsp;htp_performance_mode:2' --num_runs=1 --min_secs={secs} --max_secs={secs} 2>&1
+idle-16 | 20 |
+facemap_3dmm-cpu8 | 30 | benchmark_model --graph=/etc/models/facemap_3dmm_quantized.tflite --num_threads=8 --num_runs=1 --min_secs={secs} --max_secs={secs} 2>&1
+idle-17 | 20 |
+yamnet-npu | 30 | export ADSP_LIBRARY_PATH=/usr/lib/rfsa/adsp; benchmark_model --graph=/etc/models/yamnet.tflite --external_delegate_path=/usr/lib/libQnnTFLiteDelegate.so --external_delegate_options='backend_type:htp;library_path:/usr/lib/libQnnHtp.so;skel_library_dir:/usr/lib/rfsa/adsp;htp_performance_mode:2' --num_runs=1 --min_secs={secs} --max_secs={secs} 2>&1
+idle-18 | 20 |
+yamnet-cpu8 | 30 | benchmark_model --graph=/etc/models/yamnet.tflite --num_threads=8 --num_runs=1 --min_secs={secs} --max_secs={secs} 2>&1
+idle-19 | 20 |
+quicksrnetsmall-npu | 30 | export ADSP_LIBRARY_PATH=/usr/lib/rfsa/adsp; benchmark_model --graph=/etc/models/quicksrnetsmall_quantized.tflite --external_delegate_path=/usr/lib/libQnnTFLiteDelegate.so --external_delegate_options='backend_type:htp;library_path:/usr/lib/libQnnHtp.so;skel_library_dir:/usr/lib/rfsa/adsp;htp_performance_mode:2' --num_runs=1 --min_secs={secs} --max_secs={secs} 2>&1
+idle-20 | 20 |
+quicksrnetsmall-cpu8 | 30 | benchmark_model --graph=/etc/models/quicksrnetsmall_quantized.tflite --num_threads=8 --num_runs=1 --min_secs={secs} --max_secs={secs} 2>&1
+idle-21 | 20 |

@@ -1,0 +1,67 @@
+@page {
+  size: A4;
+  margin: 18mm 17mm 20mm 17mm;
+  @bottom-center {
+    content: counter(page) " / " counter(pages);
+    font: 8pt "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: #8a8984;
+  }
+  @bottom-left {
+    content: "Marcelo Rovai · mjrovai.com";
+    font: 8pt "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: #8a8984;
+  }
+}
+@page :first {
+  @bottom-left { content: none; }
+}
+
+html {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 10pt;
+  line-height: 1.45;
+  color: #1a1a19;
+}
+body { margin: 0; }
+
+h1 { font-size: 21pt; line-height: 1.15; margin: 0 0 10pt; color: #0b0b0b; }
+h2 {
+  font-size: 14.5pt; margin: 20pt 0 6pt; padding-bottom: 3pt;
+  border-bottom: 1.2pt solid #2a78d6; color: #0b0b0b;
+  break-after: avoid;
+}
+h3 { font-size: 11.5pt; margin: 14pt 0 4pt; color: #0b0b0b; break-after: avoid; }
+p { margin: 0 0 7pt; orphans: 3; widows: 3; }
+a { color: #2a78d6; text-decoration: none; }
+strong { color: #0b0b0b; }
+
+img { max-width: 100%; height: auto; display: block; margin: 8pt auto 3pt; break-inside: avoid; }
+/* photos: keep them from filling a whole page; diagrams and charts (PNG) stay full width */
+img[src$=".jpg"] { max-height: 92mm; width: auto; }
+img[src$="cover.jpg"] { max-height: none; width: 100%; }
+img[src*="board-annotated"] { max-height: 150mm; }
+p:has(> img) { break-inside: avoid; break-after: avoid; margin-bottom: 0; }
+p > em:only-child { display: block; text-align: center; font-size: 8pt; color: #6b6a66; }
+
+table {
+  border-collapse: collapse; width: 100%; margin: 6pt 0 10pt;
+  font-size: 8.3pt; line-height: 1.3; break-inside: auto;
+}
+thead { display: table-header-group; }
+tr { break-inside: avoid; }
+th, td { border: 0.6pt solid #d9d8d3; padding: 3pt 5pt; vertical-align: top; text-align: left; }
+th { background: #f1f0ec; font-weight: 600; }
+
+code {
+  font-family: Menlo, Consolas, monospace; font-size: 8.4pt;
+  background: #f1f0ec; padding: 0.5pt 2.5pt; border-radius: 2pt;
+}
+pre {
+  background: #f6f5f2; border: 0.6pt solid #e2e1dc; border-radius: 4pt;
+  padding: 6pt 8pt; margin: 4pt 0 10pt;
+  white-space: pre-wrap; word-break: break-all; font-size: 7.8pt; line-height: 1.35;
+}
+pre code { background: none; padding: 0; font-size: inherit; }
+
+ul, ol { margin: 0 0 8pt; padding-left: 15pt; }
+li { margin-bottom: 3pt; }

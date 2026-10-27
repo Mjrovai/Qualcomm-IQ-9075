@@ -1,0 +1,6 @@
+# label | seconds | remote command ({secs} = seconds); empty command = idle
+idle-1 | 30 |
+inception-npu | 40 | export ADSP_LIBRARY_PATH=/usr/lib/rfsa/adsp; benchmark_model --graph=/etc/models/inception_v3_quantized.tflite --external_delegate_path=/usr/lib/libQnnTFLiteDelegate.so --external_delegate_options='backend_type:htp;library_path:/usr/lib/libQnnHtp.so;skel_library_dir:/usr/lib/rfsa/adsp;htp_performance_mode:2' --num_runs=1 --min_secs={secs} --max_secs={secs} 2>&1
+idle-2 | 30 |
+inception-cpu8 | 40 | benchmark_model --graph=/etc/models/inception_v3_quantized.tflite --num_threads=8 --num_runs=1 --min_secs={secs} --max_secs={secs} 2>&1
+idle-3 | 30 |

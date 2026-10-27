@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1090 470" width="1090" height="470">
+<defs>
+<marker id="a0b0b0b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="11" markerHeight="11" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#0b0b0b"/></marker>
+<marker id="a52514e" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="11" markerHeight="11" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#52514e"/></marker>
+<marker id="aeb6834" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="11" markerHeight="11" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#eb6834"/></marker>
+<marker id="a2a78d6" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="11" markerHeight="11" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2a78d6"/></marker>
+</defs>
+<rect width="1090" height="470" fill="#fcfcfb"/>
+<text x="30" y="34" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="13" fill="#8a8984" font-weight="bold" font-style="normal" text-anchor="start">gst-ai-object-detection: one GStreamer pipeline, 30 FPS</text>
+<rect x="560" y="52" width="350" height="60" rx="8" fill="#ffffff" stroke="#52514e" stroke-width="1.5"/>
+<text x="735.0" y="77" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="15" fill="#0b0b0b" font-weight="bold" font-style="normal" text-anchor="middle">Qwen3-4B (GenieX)</text>
+<text x="735.0" y="97" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="12" fill="#52514e" font-weight="normal" font-style="normal" text-anchor="middle">prefill + decode, long prompt</text>
+<path d="M645.0,115 L645.0,169" fill="none" stroke="#2a78d6" stroke-width="2" stroke-dasharray="6 4" stroke-linejoin="round" marker-end="url(#a2a78d6)"/>
+<path d="M825.0,115 L825.0,169" fill="none" stroke="#eb6834" stroke-width="2" stroke-dasharray="6 4" stroke-linejoin="round" marker-end="url(#aeb6834)"/>
+<text x="637.0" y="148" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="11.5" fill="#2a78d6" font-weight="normal" font-style="normal" text-anchor="end">QAIRT run</text>
+<text x="833.0" y="148" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="11.5" fill="#eb6834" font-weight="normal" font-style="normal" text-anchor="start">llama.cpp run</text>
+<rect x="30" y="172" width="150" height="96" rx="8" fill="#ffffff" stroke="#c9c8c3" stroke-width="1.5"/>
+<text x="105.0" y="205.0" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="15" fill="#0b0b0b" font-weight="bold" font-style="normal" text-anchor="middle">Source</text>
+<text x="105.0" y="226.0" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="12" fill="#52514e" font-weight="normal" font-style="normal" text-anchor="middle">H.264 MP4</text>
+<text x="105.0" y="247.0" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="12" fill="#52514e" font-weight="normal" font-style="normal" text-anchor="middle">or USB camera</text>
+<rect x="210" y="172" width="150" height="96" rx="8" fill="#ffffff" stroke="#c9c8c3" stroke-width="1.5"/>
+<text x="285.0" y="215.0" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="15" fill="#0b0b0b" font-weight="bold" font-style="normal" text-anchor="middle">VPU</text>
+<text x="285.0" y="236.0" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="12" fill="#52514e" font-weight="normal" font-style="normal" text-anchor="middle">hardware decode</text>
+<rect x="390" y="172" width="150" height="96" rx="8" fill="#ffffff" stroke="#1baf7a" stroke-width="2"/>
+<text x="465.0" y="215.0" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="15" fill="#0b0b0b" font-weight="bold" font-style="normal" text-anchor="middle">GPU</text>
+<text x="465.0" y="236.0" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="12" fill="#52514e" font-weight="normal" font-style="normal" text-anchor="middle">convert, resize</text>
+<rect x="570" y="172" width="150" height="96" rx="8" fill="#ffffff" stroke="#2a78d6" stroke-width="2"/>
+<text x="645.0" y="205.0" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="15" fill="#0b0b0b" font-weight="bold" font-style="normal" text-anchor="middle">NPU</text>
+<text x="645.0" y="226.0" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="12" fill="#52514e" font-weight="normal" font-style="normal" text-anchor="middle">YOLOX INT8, ~3 ms</text>
+<text x="645.0" y="247.0" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="12" fill="#52514e" font-weight="normal" font-style="normal" text-anchor="middle">~10% of NPU time</text>
+<rect x="750" y="172" width="150" height="96" rx="8" fill="#ffffff" stroke="#eb6834" stroke-width="2"/>
+<text x="825.0" y="205.0" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="15" fill="#0b0b0b" font-weight="bold" font-style="normal" text-anchor="middle">CPU</text>
+<text x="825.0" y="226.0" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="12" fill="#52514e" font-weight="normal" font-style="normal" text-anchor="middle">postprocess,</text>
+<text x="825.0" y="247.0" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="12" fill="#52514e" font-weight="normal" font-style="normal" text-anchor="middle">orchestration</text>
+<rect x="930" y="172" width="150" height="96" rx="8" fill="#ffffff" stroke="#c9c8c3" stroke-width="1.5"/>
+<text x="1005.0" y="215.0" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="15" fill="#0b0b0b" font-weight="bold" font-style="normal" text-anchor="middle">Display</text>
+<text x="1005.0" y="236.0" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="12" fill="#52514e" font-weight="normal" font-style="normal" text-anchor="middle">compose, HDMI</text>
+<path d="M183,220.0 L207,220.0" fill="none" stroke="#0b0b0b" stroke-width="2.6" stroke-linejoin="round" marker-end="url(#a0b0b0b)"/>
+<path d="M363,220.0 L387,220.0" fill="none" stroke="#0b0b0b" stroke-width="2.6" stroke-linejoin="round" marker-end="url(#a0b0b0b)"/>
+<path d="M543,220.0 L567,220.0" fill="none" stroke="#0b0b0b" stroke-width="2.6" stroke-linejoin="round" marker-end="url(#a0b0b0b)"/>
+<path d="M723,220.0 L747,220.0" fill="none" stroke="#0b0b0b" stroke-width="2.6" stroke-linejoin="round" marker-end="url(#a0b0b0b)"/>
+<path d="M903,220.0 L927,220.0" fill="none" stroke="#0b0b0b" stroke-width="2.6" stroke-linejoin="round" marker-end="url(#a0b0b0b)"/>
+<path d="M285.0,268 L285.0,316" stroke="#c9c8c3" stroke-width="3"/>
+<path d="M465.0,268 L465.0,316" stroke="#c9c8c3" stroke-width="3"/>
+<path d="M645.0,268 L645.0,316" stroke="#c9c8c3" stroke-width="3"/>
+<path d="M825.0,268 L825.0,316" stroke="#c9c8c3" stroke-width="3"/>
+<path d="M1005.0,268 L1005.0,316" stroke="#c9c8c3" stroke-width="3"/>
+<rect x="30" y="316" width="1030" height="44" rx="8" fill="#f1f0ec" stroke="#52514e" stroke-width="1.2"/>
+<text x="545.0" y="344" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="13.5" fill="#0b0b0b" font-weight="bold" font-style="normal" text-anchor="middle">LPDDR5, ~77 GB/s: frames, buffers, model weights, KV cache</text>
+<text x="30" y="404" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="13" fill="#0b0b0b" font-weight="normal" font-style="normal" text-anchor="start">Video: 30 FPS, no extra dropped frames in either run.</text>
+<text x="30" y="430" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="13" fill="#0b0b0b" font-weight="normal" font-style="normal" text-anchor="start">LLM decode: −6% with the LLM on the NPU, −12% on the CPU. Memory is the shared resource.</text>
+</svg>
