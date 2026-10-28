@@ -282,14 +282,18 @@ IQ_DYNAMIC = {
     ("Qwen3-4B", "IQ-9075 CPU (llama.cpp)"): (0.79, 322),
     ("Qwen3.5-0.8B", "IQ-9075 CPU (llama.cpp)"): (0.23, 54),
     ("Qwen3.5-0.8B", "IQ-9075 NPU (llama.cpp Hexagon)"): (0.42, 20),
+    # upstream llama.cpp 338fce6, data/power/llm-llamacpp-cpu-nostream-20261027.csv
+    ("Qwen3.5-4B", "IQ-9075 CPU (llama.cpp)"): (0.96, 250),
 }
 JETSON = "Jetson GPU (llama.cpp CUDA)"
+PI = "#8f8d87"
 
 
 def jetson_dynamic():
     """Mean dynamic J/token (short prompt) and prefill J (long prompt) per model, from data/jetson."""
     out = {}
-    for name, model in (("energy-0.8b-20261027.csv", "Qwen3.5-0.8B"), ("energy-4b-20261027.csv", "Qwen3-4B")):
+    for name, model in (("energy-0.8b-20261027.csv", "Qwen3.5-0.8B"), ("energy-4b-20261027.csv", "Qwen3-4B"),
+                        ("energy-q35-4b-20261027.csv", "Qwen3.5-4B")):
         with open(os.path.join(ROOT, "data", "jetson", name)) as f:
             rows = list(csv.DictReader(f))
         jt = np.mean([float(r["J_per_token_dynamic"]) for r in rows if r["prompt"] == "short"])
@@ -302,12 +306,13 @@ def chart_jetson():
     """IQ-9075 vs Jetson Orin Nano Super, energy above idle (English only)."""
     vals = {**IQ_DYNAMIC, **jetson_dynamic()}
     order = [("Qwen3-4B", "IQ-9075 NPU (QAIRT)"), ("Qwen3-4B", JETSON), ("Qwen3-4B", "IQ-9075 CPU (llama.cpp)"),
+             ("Qwen3.5-4B", JETSON), ("Qwen3.5-4B", "IQ-9075 CPU (llama.cpp)"),
              ("Qwen3.5-0.8B", JETSON), ("Qwen3.5-0.8B", "IQ-9075 CPU (llama.cpp)"),
              ("Qwen3.5-0.8B", "IQ-9075 NPU (llama.cpp Hexagon)")]
     color = lambda k: GPU if k[1] == JETSON else (NPU if "NPU" in k[1] else CPU)
-    fig, axes = plt.subplots(1, 2, figsize=(11, 4.0), dpi=200, sharey=True)
+    fig, axes = plt.subplots(1, 2, figsize=(11, 5.2), dpi=200, sharey=True)
     fig.patch.set_facecolor(SURFACE)
-    y = np.array([5.6, 4.6, 3.6, 1.8, 0.8, -0.2])
+    y = np.array([8.4, 7.4, 6.4, 4.6, 3.6, 1.8, 0.8, -0.2])
     for ax, i, xlabel, fmt in ((axes[0], 0, "Decode energy per token, above idle (J)", "{:.2f} J"),
                                (axes[1], 1, "Prefill energy, long prompt, above idle (J, log scale)", "{:.0f} J")):
         style(ax)
@@ -325,16 +330,83 @@ def chart_jetson():
             ax.set_xticks([5, 10, 20, 50, 100, 200, 500], ["5", "10", "20", "50", "100", "200", "500"])
             ax.minorticks_off()
         else:
-            ax.set_xlim(0, 1.0)
+            ax.set_xlim(0, 1.15)
     axes[0].set_yticks(y, [k[1] for k in order])
     axes[0].tick_params(axis="y", length=0, labelcolor=INK, labelsize=9)
-    for yy, model in ((6.35, "Qwen3-4B"), (2.55, "Qwen3.5-0.8B")):
+    for yy, model in ((9.15, "Qwen3-4B"), (5.35, "Qwen3.5-4B"), (2.55, "Qwen3.5-0.8B")):
         axes[0].text(-0.02, yy, model, transform=axes[0].get_yaxis_transform(), ha="right", va="center",
                      fontsize=9.5, color=INK, fontweight="bold")
     fig.suptitle("Energy above idle: IQ-9075 (meter at the barrel jack) vs Jetson Orin Nano Super "
                  "(on-board module sensor)", x=0.01, ha="left", fontsize=11, color=INK)
     fig.tight_layout()
     save(fig, "jetson-vs-iq9075", "en")
+
+
+def board_speeds():
+    """Mean decode tok/s (short prompt) and time to first token (long prompt) per (model, board)."""
+    files = {JETSON: ["jetson/llm-prompts-20261027.csv", "jetson/energy-q35-4b-20261027.csv"],
+             "IQ-9075 CPU (llama.cpp)": ["llamacpp/iq9075-cpu-llamacpp-20261027.csv"],
+             "Raspberry Pi 5 CPU (llama.cpp)": ["llamacpp/raspi5-cpu-llamacpp-20261028.csv"]}
+    out = {}
+    for board, names in files.items():
+        for name in names:
+            with open(os.path.join(ROOT, "data", name)) as f:
+                rows = list(csv.DictReader(f))
+            for m in {r["model"] for r in rows}:
+                model = m.replace("-Q4_0", "")
+                tps = np.mean([float(r["decode_tok_s"]) for r in rows if r["model"] == m and r["prompt"] == "short"])
+                ttft = np.mean([float(r["ttft_s"]) for r in rows if r["model"] == m and r["prompt"] == "long"])
+                out[(model, board)] = (tps, ttft)
+    # GenieX on the IQ-9075 NPU, from the LLM section (Oct 14)
+    out[("Qwen3-4B", "IQ-9075 NPU (QAIRT)")] = (17.9, 1.7)
+    out[("Qwen3.5-0.8B", "IQ-9075 NPU (llama.cpp Hexagon)")] = (29.7, 1.7)
+    return out
+
+
+def chart_boards():
+    """Same GGUF files and prompts on the Jetson, the IQ-9075, and a Raspberry Pi 5 (English only)."""
+    vals = board_speeds()
+    boards = [JETSON, "IQ-9075 NPU", "IQ-9075 CPU (llama.cpp)", "Raspberry Pi 5 CPU (llama.cpp)"]
+    colors = [GPU, NPU, CPU, PI]
+    models = ["Qwen3-4B", "Qwen3.5-4B", "Qwen3.5-0.8B"]
+    npu = {"Qwen3-4B": "IQ-9075 NPU (QAIRT)", "Qwen3.5-0.8B": "IQ-9075 NPU (llama.cpp Hexagon)"}
+    fig, axes = plt.subplots(1, 2, figsize=(11, 4.4), dpi=200)
+    fig.patch.set_facecolor(SURFACE)
+    w = 0.2
+    for ax, i, ylabel in ((axes[0], 0, "Decode, short prompt (tok/s)"),
+                          (axes[1], 1, "Long prompt to first token (s, log scale)")):
+        style(ax)
+        for j, (board, c) in enumerate(zip(boards, colors)):
+            for k, model in enumerate(models):
+                key = (model, npu.get(model, "")) if board == "IQ-9075 NPU" else (model, board)
+                if key not in vals:
+                    ax.text(k + (j - 1.5) * w, 0.6 if i else 1, "n/a", ha="center", va="bottom", fontsize=7,
+                            color=INK2, rotation=90)
+                    continue
+                v = vals[key][i]
+                ax.bar(k + (j - 1.5) * w, v, width=w * 0.92, color=c)
+                ax.text(k + (j - 1.5) * w, v * (1.08 if i else 1) + (0 if i else 0.8),
+                        f"{v:.1f}" if not i or v < 10 else f"{v:.0f}",
+                        ha="center", va="bottom", fontsize=7.5, color=INK)
+        ax.set_xticks(range(len(models)), models)
+        ax.tick_params(axis="x", length=0, labelcolor=INK, labelsize=9)
+        ax.grid(axis="x", visible=False)
+        ax.set_ylabel(ylabel, color=INK2, fontsize=9)
+        if i:
+            ax.set_yscale("log")
+            ax.set_ylim(0.5, 200)
+            ax.set_yticks([1, 2, 5, 10, 20, 50, 100], ["1", "2", "5", "10", "20", "50", "100"])
+            ax.minorticks_off()
+        else:
+            ax.set_ylim(0, 78)
+    h = [plt.Rectangle((0, 0), 1, 1, color=c) for c in colors]
+    fig.legend(h, ["Jetson Orin Nano Super GPU (llama.cpp CUDA)", "IQ-9075 NPU (GenieX)",
+                   "IQ-9075 CPU (llama.cpp)", "Raspberry Pi 5 CPU (llama.cpp)"],
+               loc="upper left", bbox_to_anchor=(0.01, 0.95), ncol=4, frameon=False, fontsize=9, labelcolor=INK)
+    fig.suptitle("Same GGUF files and prompts on three boards (NPU: Qualcomm's own runtimes)", x=0.01, ha="left",
+                 fontsize=11, color=INK)
+    fig.tight_layout(rect=(0, 0, 1, 0.9))
+    save(fig, "llamacpp-boards", "en")
 
 
 def main():
@@ -346,6 +418,7 @@ def main():
         chart_llm_trace(lang)
         chart_tokens(lang)
     chart_jetson()
+    chart_boards()
 
 
 if __name__ == "__main__":

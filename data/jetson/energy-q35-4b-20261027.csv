@@ -1,0 +1,5 @@
+model,prompt,run,idle_W,prompt_tokens,ttft_s,request_J_dynamic,gen_tokens,decode_tok_s,decode_W,prefill_J_total,prefill_J_dynamic,J_per_token_total,J_per_token_dynamic,decode_cpu_gpu_W,decode_soc_W
+Qwen3.5-4B-Q4_0,short,1,4.68,25,0.23,203.7,256,17.3,18.37,1.9,0.8,1.064,0.793,7.96,4.90
+Qwen3.5-4B-Q4_0,short,2,4.71,25,0.24,203.1,256,17.3,18.37,1.6,0.4,1.064,0.792,7.94,4.87
+Qwen3.5-4B-Q4_0,long,1,4.69,1641,2.87,59.9,31,17.2,18.27,48.8,35.3,1.065,0.792,7.95,4.85
+Qwen3.5-4B-Q4_0,long,2,4.69,1641,2.86,60.0,31,17.2,18.34,48.9,35.5,1.064,0.792,7.98,4.95

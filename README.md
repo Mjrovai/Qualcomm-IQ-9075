@@ -4,9 +4,11 @@
 
 *Cover image generated locally with Qwen-Image 2.1 under the author's direction.*
 
-Oct 14, 2026, updated Oct 26, 2026 with energy measurements and Oct 27, 2026 with a Jetson Orin Nano Super comparison · @Marcelo Rovai
+Oct 14, 2026, updated Oct 26, 2026 with energy measurements and Oct 27–28, 2026 with Jetson Orin Nano Super and Raspberry Pi 5 comparisons · @Marcelo Rovai
 
-In one afternoon, without flashing a new OS, the IQ-9075 EVK showed what a heterogeneous SoC delivers: **the NPU sped up INT8 CNNs by 11 to 95 times, ran object detection at 30 FPS with headroom to spare, and did the prefill of a 4-billion-parameter LLM 18 times faster than the CPU**. Decode, on the other hand, stayed bound by memory bandwidth, whichever processor ran it. A second session, measuring power at the board's input, showed that the **NPU's advantage is even larger in energy: 5 to 70 times less per inference on the vision models, and two-thirds of the CPU's energy per token on LLM decode, at the same speed**. Next to a Jetson Orin Nano Super running the same LLM files, the Jetson's GPU decoded 15 to 20% faster, but on the 4B model the IQ-9075's NPU did the prefill faster and used less energy in both phases.
+In one afternoon, without flashing a new OS, the IQ-9075 EVK showed what a heterogeneous SoC delivers: **the NPU sped up INT8 CNNs by 11 to 95 times, ran object detection at 30 FPS with headroom to spare, and did the prefill of a 4-billion-parameter LLM 18 times faster than the CPU**. Decode, on the other hand, stayed bound by memory bandwidth, whichever processor ran it. A second session, measuring power at the board's input, showed that the **NPU's advantage is even larger in energy: 5 to 70 times less per inference on the vision models, and two-thirds of the CPU's energy per token on LLM decode, at the same speed**. Next to a Jetson Orin Nano Super running the same LLM files, the Jetson's GPU decoded 15 to 20% faster, but on the **4B model the IQ-9075's NPU did the prefill faster and used less energy in both phases**. Without an NPU bundle, as with the newer Qwen3.5-4B, the Jetson won on both counts, and a Raspberry Pi 5 with the same llama.cpp decoded 4 to 5 times slower than the IQ-9075's CPU. 
+
+> We hope Qualcomm keep updating the LLM models compatibility with the NPU (at least the most capable ones).
 
 ## The kit
 
@@ -44,17 +46,17 @@ The IQ-9075 doesn't compete on raw power with NVIDIA's top line; its edge is a d
 
 |  | Arduino UNO Q | Arduino VENTUNO Q | Raspberry Pi 5 | Jetson Orin Nano Super | Jetson AGX Orin 64GB | IQ-9075 EVK |
 | --- | --- | --- | --- | --- | --- | --- |
-| Class | SBC + MCU, education | SBC + MCU, AI and robotics | general-purpose SBC | entry Edge AI | high-end Edge AI | industrial Edge AI |
-| CPU | 4× A53 (QRB2210) + STM32U585 | 8× Kryo Gen 6 (4 performance + 4 efficiency, IQ-8275) + STM32H5F5 | 4× A76 | 6× A78AE | 12× A78AE | 8× Kryo Gen 6 |
-| AI accelerator | no dedicated NPU | Hexagon NPU | none (Hailo via AI HAT+) | Ampere GPU | Ampere GPU + DLA | Hexagon NPU |
-| Stated AI (INT8) | — | 40 dense TOPS | 13–26 TOPS with HAT | \~67 sparse TOPS | \~275 sparse TOPS | 100 dense / 200 sparse |
+| Class | SBC + MCU, real projects, prototyping, and education | SBC + MCU, AI and robotics | general-purpose SBC | entry Edge AI | high-end Edge AI | industrial Edge AI |
+| CPU | 4× A53 at 2.0 GHz (QRB2210) + STM32U585 | 8× Kryo Gen 6 (IQ-8275): 4 performance cores at up to 2.35 GHz + 4 efficiency cores, + STM32H5F5 | 4× A76 at 2.4 GHz | 6× A78AE at 1.7 GHz | 12× A78AE at 2.2 GHz | 8× Kryo Gen 6 (QCS9075): 8 performance cores (A78C) at 2.36 GHz |
+| AI accelerator | no dedicated NPU (Hexagon DSP for sensors and audio) | Hexagon NPU | none on the SoC; add-ons: Hailo (AI HAT+, AI HAT+ 2), MemryX MX3 (M.2) | Ampere GPU | Ampere GPU + DLA | Hexagon NPU |
+| Stated AI (INT8) | — | 40 dense TOPS | 13–26 TOPS (AI HAT+), 40 TOPS INT4 (AI HAT+ 2), 24 TOPS (MX3) | \~67 sparse TOPS | \~275 sparse TOPS | 100 dense / 200 sparse |
 | RAM | 2–4 GB | 16 GB | up to 16 GB | 8 GB | 64 GB | 36 GB with ECC |
 | Real-time | yes (MCU) | yes (MCU) | no | no | no | yes (MCU + SAIL) |
-| AI ecosystem | App Lab, Edge Impulse | App Lab, Ubuntu/Debian | broad | CUDA, TensorRT | CUDA, TensorRT | QNN/QAIRT, LiteRT, AI Hub, GenieX, Edge Impulse |
+| AI ecosystem | App Lab, Edge Impulse, Debian (llama.cpp on the CPU) | App Lab, Ubuntu/Debian | Raspberry Pi OS (Debian), broad | CUDA, TensorRT | CUDA, TensorRT | QNN/QAIRT, LiteRT, AI Hub, GenieX, Edge Impulse |
 
 Two caveats. NVIDIA quotes sparse TOPS while Qualcomm highlights dense ones; on a sparse basis, the IQ-9075 sits between the Orin Nano and the AGX Orin. And for LLMs, what matters is memory bandwidth: about 77 GB/s on the IQ-9075 versus about 205 GB/s on the AGX Orin.
 
-There is also a teaching continuity: the Arduino UNO Q uses an entry-level Dragonwing (QRB2210), and the Arduino VENTUNO Q steps up to a Dragonwing IQ8 (IQ-8275), a smaller sibling of the IQ-9075 with fewer performance cores, 40 TOPS instead of 100, and 16 GB of RAM. The same software ecosystem spans from the lab kit to the industrial board.
+There is also a continuity across the Qualcomm boards: the Arduino UNO Q uses an entry-level Dragonwing (QRB2210), and the Arduino VENTUNO Q steps up to a Dragonwing IQ8 (IQ-8275), a smaller sibling of the IQ-9075 with half the performance cores (4 against 8), 40 TOPS instead of 100, and 16 GB of RAM. The same software ecosystem spans from the maker board to the industrial one, and what students learn on one carries over to the others.
 
 ## First contact: the factory image
 
@@ -301,21 +303,35 @@ Prefill, long prompt (1,882 tokens for Qwen3, 1,641 for Qwen3.5):
 - **On the 0.8B model, the CPU wins decode on both counts:** twice as fast and half the energy per token. llama.cpp's Hexagon backend drew almost as much as the CPU while generating half as fast. For prefill, even this backend saved energy: 31 J against 89 J.
 - **The runtime matters for energy as much as for speed.** On the NPU, QAIRT ran the 4B model at 14 W; llama.cpp's Hexagon backend needed 19 W for a model five times smaller.
 
-## Versus the Jetson Orin Nano Super
+## Versus the Jetson Orin Nano Super and the Raspberry Pi 5
 
-The Jetson Orin Nano Super is the closest NVIDIA board in the "Where it fits" table, so I ran the LLM tests on it with the **same GGUF files** (copied from the IQ-9075, with matching SHA-256), the same prompts, seed 42, 256 tokens, and thinking disabled. The Jetson ran JetPack 6.2.1 (L4T 36.4.7) in MAXN\_SUPER mode, with llama.cpp built from source with CUDA (commit `338fce6`) and every layer on the GPU. Each number is the mean of two runs after a warm-up; the runs agreed within 1%.
+The Jetson Orin Nano Super is the closest NVIDIA board in the "Where it fits" table, and the Raspberry Pi 5 is the general-purpose reference, so I ran the LLM tests on both with the **same GGUF files** (matching SHA-256), the same prompts, seed 42, 256 tokens, and thinking disabled. All three boards ran the same llama.cpp commit (`338fce6`), built from source:
 
-| | Jetson GPU (llama.cpp CUDA) | IQ-9075 NPU | IQ-9075 CPU (llama.cpp) |
-| --- | --- | --- | --- |
-| Qwen3-4B decode, short prompt | **20.6 tok/s** | 17.9 tok/s (QAIRT) | 17.9 tok/s |
-| Qwen3-4B, long prompt to first token | 2.6 s | **1.7 s** (QAIRT) | 31.1 s |
-| Qwen3-4B decode, long prompt | **19.4 tok/s** | 16.1 tok/s (QAIRT) | 13.9 tok/s |
-| Qwen3.5-0.8B decode, short prompt | **68.0 tok/s** | 29.7 tok/s (Hexagon) | 57.1 tok/s |
-| Qwen3.5-0.8B, long prompt to first token | **0.70 s** | 1.7 s (Hexagon) | 5.1 s |
+- **Jetson:** JetPack 6.2.1 (L4T 36.4.7) in MAXN\_SUPER mode, CUDA build, every layer on the GPU.
+- **IQ-9075:** the factory Qualcomm Linux 1.6 image, as in every other test. Because that image has no compiler, llama.cpp was built and run inside an `ubuntu:24.04` Docker container: Ubuntu supplied only the compiler and libraries, while the kernel, drivers, and hardware were Qualcomm Linux's. CPU build, 8 threads. Its speeds matched the GenieX llama.cpp runs within 3% on decode; prefill was up to 10% faster.
+- **Raspberry Pi 5 (8 GB):** Raspberry Pi OS based on Debian 13, CPU build, 4 threads, official active cooler.
 
-The IQ-9075 numbers are the ones from the LLM section. On the 4B model the NPU column is a different file, Qualcomm's W4A16 bundle for QAIRT, so only the Jetson and the IQ-9075 CPU columns run identical bytes.
+The new model in this round is **Qwen3.5-4B**, which has no QAIRT bundle for this chip, so on the IQ-9075 it ran on the CPU only. Each number is the mean of two runs after a warm-up; the runs agreed within 1%.
 
-**Energy, with a caveat.** I measured the Jetson's power without the FNB58: its barrel jack accepts 9 to 20 V, and the 20 V trigger cable used on the IQ-9075 leaves no margin. Instead, a script read the board's own INA3221 sensor at 20 samples per second. That sensor reports the module's input rail, `VDD_IN`, so it **leaves out the carrier board (Wi-Fi card, NVMe SSD, USB, regulators) and the power supply**, and it reads lower than a meter at the barrel jack would. Its readings are also smoothed: a load step takes about 1 s to show, so decode energy comes from the steady part of the 256-token runs, and prefill energy from integrating the power over the whole long-prompt request. On the short prompt, both methods agreed within 1%. Idle on the module rail was 4.7 W, against 6.6 to 6.9 W for the whole IQ-9075 board.
+| | Jetson GPU | IQ-9075 NPU | IQ-9075 CPU | Raspberry Pi 5 CPU |
+| --- | --- | --- | --- | --- |
+| Qwen3-4B decode, short prompt | **20.6 tok/s** | 17.9 tok/s (QAIRT) | 18.4 tok/s | 4.0 tok/s |
+| Qwen3-4B, long prompt to first token | 2.6 s | **1.7 s** (QAIRT) | 30.4 s | 73.1 s |
+| Qwen3-4B decode, long prompt | **19.4 tok/s** | 16.1 tok/s (QAIRT) | 14.1 tok/s | 2.0 tok/s |
+| Qwen3.5-4B decode, short prompt | **17.3 tok/s** | — | 14.6 tok/s | 2.8 tok/s |
+| Qwen3.5-4B, long prompt to first token | **2.9 s** | — | 24.6 s | 59.8 s |
+| Qwen3.5-0.8B decode, short prompt | **68.0 tok/s** | 29.7 tok/s (Hexagon) | 57.9 tok/s | 13.1 tok/s |
+| Qwen3.5-0.8B, long prompt to first token | **0.70 s** | 1.7 s (Hexagon) | 4.6 s | 12.5 s |
+
+The NPU column comes from the LLM section, with GenieX. For the 4B model, it is a different file: Qualcomm's W4A16 bundle for QAIRT, so only the other three columns use identical bytes.
+
+![Decode speed and time to first token for Qwen3-4B, Qwen3.5-4B, and Qwen3.5-0.8B on the Jetson GPU, the IQ-9075 NPU and CPU, and the Raspberry Pi 5 CPU](figures/llamacpp-boards-en.png)
+
+**The Raspberry Pi needed a second run.** The first run, with no pauses, ended at 75 °C with the throttling flag set (`vcgencmd get_throttled` = `0xe0000`). I repeated it with a pause before each request until the SoC was below 50 °C, logging temperature, clock, and throttling state every second. The board reached 77 °C with the fan at full speed, but the CPU never left 2.4 GHz and no throttling bit was active during the runs. The 4B numbers matched the first run within 3%. The 0.8B model had decoded 3 to 10% faster in the first run, apart from one outlier at 8.2 tok/s.
+
+**Energy, with a caveat.** I measured the Jetson's power **without the FNB58**: its barrel jack accepts 9 to 20 V, and the 20 V trigger cable used on the IQ-9075 leaves no margin. Instead, a script read the board's own INA3221 sensor at 20 samples per second. That sensor reports the module's input rail, `VDD_IN`, so it **leaves out the carrier board (Wi-Fi card, NVMe SSD, USB, regulators) and the power supply**, and it reads lower than a meter at the barrel jack would. Its readings are also smoothed: a load step takes about 1 s to show, so decode energy comes from the steady part of the 256-token runs, and prefill energy from integrating the power over the whole long-prompt request. On the short prompt, both methods agreed within 1%. Idle on the module rail was 4.7 W, against 6.6 to 6.9 W for the whole IQ-9075 board. The Raspberry Pi's energy was not measured.
+
+On the IQ-9075, Qwen3.5-4B was measured with the FNB58, as before, using upstream llama.cpp. In that run, Qwen3-4B on the CPU repeated the GenieX numbers of October 26 within 2% (0.79 J per token above idle, 316 J of prefill), so the two IQ-9075 sessions can be compared directly.
 
 Because the two methods measure different things, the fairer comparison is the energy above idle, where the fixed losses of each board largely cancel:
 
@@ -323,17 +339,22 @@ Because the two methods measure different things, the fairer comparison is the e
 | --- | --- | --- | --- |
 | Qwen3-4B decode, per token | 0.68 J | **0.41 J** | 0.79 J |
 | Qwen3-4B prefill, long prompt | 35 J | **15 J** | 322 J |
+| Qwen3.5-4B decode, per token | **0.79 J** | — | 0.96 J |
+| Qwen3.5-4B prefill, long prompt | **35 J** | — | 250 J |
 | Qwen3.5-0.8B decode, per token | **0.17 J** | 0.42 J | 0.23 J |
 | Qwen3.5-0.8B prefill, long prompt | **8 J** | 20 J | 54 J |
 
-![Energy above idle for Qwen3-4B and Qwen3.5-0.8B on the IQ-9075 NPU and CPU and on the Jetson GPU: decode per token and prefill of the long prompt](figures/jetson-vs-iq9075-en.png)
+![Energy above idle for Qwen3-4B, Qwen3.5-4B, and Qwen3.5-0.8B on the IQ-9075 NPU and CPU and on the Jetson GPU: decode per token and prefill of the long prompt](figures/jetson-vs-iq9075-en.png)
 
-In total energy, which flatters the Jetson here, the 4B model used 0.91 J per token and 48 J of prefill on the Jetson, against 0.78 J and 27 J on the IQ-9075's NPU.
+In total energy, which flatters the Jetson here, the Qwen3-4B model used 0.91 J per token and 48 J of prefill on the Jetson, against 0.78 J and 27 J on the IQ-9075's NPU. For Qwen3.5-4B, the totals were 1.06 J and 49 J on the Jetson, against 1.43 J and 419 J on the IQ-9075's CPU, which decoded at 20.8 W.
 
-- **The Jetson decodes faster.** Its LPDDR5 delivers 102 GB/s against 77 GB/s, and decode follows memory: 15 to 20% more tokens/s on both models. On the 4B model it reached about 49 GB/s effective, 48% of its theoretical bandwidth, against 55% on the IQ-9075.
-- **On the 4B model, the NPU is the more efficient engine.** It used 40% less energy per token above idle and less than half the prefill energy, while also finishing the prefill sooner. The sensor caveat cannot close that gap: a meter at the Jetson's barrel jack would only add to its numbers.
+- **The Jetson decodes faster.** Its LPDDR5 delivers 102 GB/s against 77 GB/s, and decode follows memory: 12 to 18% more tokens/s than the IQ-9075's fastest processor on every model. On Qwen3-4B, it reached about 49 GB/s effective, 48% of its theoretical bandwidth, against 55 to 57% on the IQ-9075.
+- **On Qwen3-4B, the NPU is the more efficient engine.** It used 40% less energy per token above idle and less than half the prefill energy, while also finishing the prefill sooner. The sensor caveat cannot close that gap: a meter at the Jetson's barrel jack would only add to its numbers.
+- **Without an NPU path, the Jetson wins.** Qwen3.5-4B ran only on the IQ-9075's CPU, which took 8.6 times longer than the Jetson's GPU to reach the first token and used 7 times more prefill energy above idle. The IQ-9075's advantage on Qwen3-4B comes from the NPU and its runtime, not from the board as a whole.
+- **Qwen3.5-4B is slower than Qwen3-4B on every board**, 16 to 30% in decode. Its file is 9% larger (2.58 GB against 2.38 GB), and its hybrid architecture, with linear-attention layers, probably adds work per token. With the long prompt, it reached the first token sooner on the CPUs, but mostly because its tokenizer turned the same text into 13% fewer tokens (1,641 against 1,882). Per token, prefill ran at about the same speed on the CPUs and 21% slower on the Jetson.
 - **On the 0.8B model, the Jetson wins.** It was the fastest, and it used the least energy above idle, by a margin (0.17 against 0.23 J per token) larger than the carrier board's conversion losses are likely to add. The GPU runs a small model with little overhead, while the NPU pays a fixed cost to dispatch each layer, the same lesson the IQ-9075's own CPU taught.
-- **Peak speed and efficiency point to different boards.** For the fastest tokens on a small model, the Jetson; for the most work per joule on a mid-size model, and for prefill-heavy workloads like RAG, the IQ-9075's NPU.
+- **The Raspberry Pi 5 is in another class.** It decoded 4.4 to 5.2 times slower than the IQ-9075's CPU, in line with its memory: about 17 GB/s of LPDDR4X, of which Qwen3-4B used 9.5 GB/s (56%), the same fraction as the IQ-9075. Prefill was 2.4 to 2.7 times slower than on the IQ-9075's CPU, with half as many cores. More than a minute to read a 1,900-token prompt rules out RAG on a 4B model, but the 0.8B model, at 13 tok/s, is usable for short chats.
+- **Peak speed and efficiency point to different boards.** For the fastest tokens and for models without a Qualcomm bundle, the Jetson; for the most work per joule on a mid-size model with a QAIRT bundle, and for prefill-heavy workloads like RAG, the IQ-9075's NPU.
 
 ## Lessons and next steps
 
@@ -344,14 +365,14 @@ On this SoC, the scarce resource for generative AI is memory bandwidth, not TOPS
 3. **LLMs have two phases with different bottlenecks.** Prefill is compute-bound and gained 18 times on the NPU; decode is bandwidth-bound and kept the same speed, though not the same energy.
 4. **The runtime matters as much as the hardware.** The same 4B model failed on llama.cpp's Hexagon backend and ran well on QAIRT, which also drew less power.
 5. **Measure energy, not just speed.** The NPU sometimes drew more power than the CPU, but almost always used less energy per inference; it saved energy even on a model where it was slower.
-6. **Faster memory decodes faster; more compute prefills cheaper.** The Jetson's GPU, with more bandwidth, decoded fastest, while the IQ-9075's NPU did the 4B prefill faster and with less energy.
+6. **Faster memory decodes faster; more compute prefills cheaper.** The Jetson's GPU, with more bandwidth, decoded fastest, and the Raspberry Pi 5, with less than a quarter of the IQ-9075's bandwidth, decoded about 4.5 times slower. The IQ-9075's NPU did the 4B prefill faster and with less energy, but only where Qualcomm publishes a bundle for the model.
 7. **The factory image is already a complete test platform.** Models, apps, Qdemo and Docker made every test possible without flashing anything.
 
-Next steps: flash Ubuntu 24.04 Server, which brings `apt`, `pip` and the documented path to Edge Impulse and AI Hub; test the Qwen3.5 and Gemma 4 families with llama.cpp, which have no QAIRT bundle for this chip yet, and compare them with the same models on a Raspberry Pi; test several camera streams in parallel with the multistream app; compare the HTP's power modes; and repeat the LLM tests with an 8B model, such as Qwen3-8B, which has a QAIRT bundle for the QCS9075, to find the practical limit of the 36 GB; and repeat the Jetson energy runs with a meter at its barrel jack, using a 15 V PD trigger.
+Next steps: flash Ubuntu 24.04 Desktop, which brings `apt`, `pip`, and the documented path to AI Hub and Edge Impulse, including its ExecuTorch example that compiles PyTorch models for this board's NPU; test larger models from the Qwen3.5 and Gemma 4 families with llama.cpp, such as Qwen3.5-9B, which have no QAIRT bundle for this chip yet; test several camera streams in parallel with the multistream app; compare the HTP's power modes; and repeat the LLM tests with an 8B model, such as Qwen3-8B, which has a QAIRT bundle for the QCS9075, to find the practical limit of the 36 GB; and repeat the Jetson energy runs with a meter at its barrel jack, using a 15 V PD trigger.
 
 ## Appendix: reproducible commands
 
-All commands run as root, over SSH, on the factory Qualcomm Linux 1.6 image, except section 6, which runs on the Jetson.
+All commands run as root, over SSH, on the factory Qualcomm Linux 1.6 image, except section 6, which also covers the Jetson and the Raspberry Pi 5.
 
 ### 1. Diagnostics
 
@@ -439,7 +460,7 @@ idle-01 | 20 |
 
 For LLMs, the remote command runs `geniex infer` inside the container followed by `echo GEN_END=$(date +%s.%N)`, so the end of generation is stamped on the board's clock. In the current GenieX image, the AI Hub model appears as `qualcomm/Qwen3-4B`.
 
-### 6. Jetson Orin Nano Super
+### 6. Upstream llama.cpp: Jetson, IQ-9075 CPU, and Raspberry Pi 5
 
 llama.cpp built on the Jetson with CUDA (Orin's compute capability is 8.7):
 
@@ -463,6 +484,37 @@ The Jetson's CPU and GPU share its 8 GB, and the CUDA allocator does not reclaim
 sudo sh -c 'sync; echo 3 > /proc/sys/vm/drop_caches'
 ```
 
+For Qwen3.5-4B, `llm_energy.py --load-mode dio` loads the model with direct I/O, so it does not fill the page cache again.
+
+The factory image on the IQ-9075 has no compiler, so llama.cpp was built inside a container that shares the host's network and folders:
+
+```bash
+docker run -d --name llamacpp --network host -v /root/llama:/work -v /root/geniex-data:/data ubuntu:24.04 sleep infinity
+docker exec -it llamacpp bash
+# inside the container:
+apt update && apt install -y build-essential cmake git python3
+cd /work && git clone https://github.com/ggml-org/llama.cpp && cd llama.cpp && git checkout 338fce6
+cmake -B build -DLLAMA_CURL=OFF -DCMAKE_BUILD_TYPE=Release
+cmake --build build -j8 --target llama-server llama-bench
+```
+
+The energy run pairs a script on the board, which records when each phase happened, with the FNB58 log on the Mac. `--no-stream` matters on a CPU: streaming each token over HTTP competes with the 8 inference threads and slowed decode by 5 to 20%.
+
+```bash
+# on the IQ-9075, inside the container, while fnb58_log.py records on the Mac
+python3 llm_windows.py --bin llama.cpp/build/bin --models models --long /data/longo.txt --ngl 0 --threads 8 \
+    --only Qwen3.5-4B-Q4_0 --no-stream -o windows.csv
+# on the Mac
+python3 tools/fnb58/llm_fnb58.py data/power/session-<date>.csv windows.csv -o energy.csv
+```
+
+On the Raspberry Pi 5, the same CPU build runs natively. `raspi_run_cool.sh` waits for the SoC to cool below 50 °C before each request (`llm_prompts.py --cool-below 50`) and logs temperature, clock, and `vcgencmd get_throttled` every second:
+
+```bash
+cmake -B build -DLLAMA_CURL=OFF -DCMAKE_BUILD_TYPE=Release && cmake --build build -j4 --target llama-server
+./raspi_run_cool.sh
+```
+
 ### 7. Switching OS
 
 Flashing Ubuntu erases the factory image. The simplest path is Qualcomm Launcher (GUI, Windows, Linux or macOS). From the command line, with QDL: turn on DIP switch SW2-3 to enter EDL mode, connect USB-C to the USB0 port and flash, in this order, UFS provisioning, CDT, SAIL firmware and the Ubuntu image, following the official guide listed in the sources. The SW2 switch and the USB0 port are labeled in the board image in "The kit" section.
@@ -484,19 +536,21 @@ Flashing Ubuntu erases the factory image. The simplest path is Qualcomm Launcher
 - [Qualcomm AI Hub models on Hugging Face](https://huggingface.co/qualcomm)
 - [NVIDIA Jetson Orin Nano Super Developer Kit](https://www.nvidia.com/en-us/autonomous-machines/embedded-systems/jetson-orin/nano-super-developer-kit/)
 - [llama.cpp](https://github.com/ggml-org/llama.cpp)
+- [Edge Impulse, PyTorch to ExecuTorch with QNN on the IQ-9075](https://github.com/edgeimpulse/example-executorch-qnn)
 
-All measurements were taken by the author. The IQ-9075 ran the factory Qualcomm Linux 1.6-ver.1.2.1 image, with the `latest` GenieX image from Docker Hub as of each date: performance on October 14, 2026, and energy on October 26, 2026. The Jetson Orin Nano Super comparison ran on October 27, 2026.
+All measurements were taken by the author. The IQ-9075 ran the factory Qualcomm Linux 1.6-ver.1.2.1 image, with the `latest` GenieX image from Docker Hub as of each date: performance on October 14, 2026, and energy on October 26, 2026. The Jetson Orin Nano Super comparison and the IQ-9075's upstream llama.cpp runs took place on October 27, 2026, and the Raspberry Pi 5 runs on October 28, 2026.
 
 
 ## About this repository
 
 - `figures/`: photos, charts, and diagrams used in this tutorial.
 - `tools/fnb58/`: the FNB58 logger (`fnb58_log.py`), the benchmark runner and report (`power_bench.py`), the slicer (`fnb58_slice.py`), the plans run on October 26, and the scripts that draw the charts and diagrams. Set `IQ9075_HOST` and `IQ9075_KEY` to point `power_bench.py` at your board.
-- `tools/jetson/`: the LLM prompt and energy scripts used on the Jetson Orin Nano Super.
+- `tools/jetson/`: the LLM prompt and energy scripts used on the Jetson Orin Nano Super, also used on the IQ-9075 and the Raspberry Pi 5 (`llm_prompts.py`, `raspi_run_cool.sh`). `tools/fnb58/llm_windows.py` and `llm_fnb58.py` measure llama.cpp energy on the IQ-9075 with the FNB58.
 - `tools/make_board_figure.py`: the script that labeled the board image. Qualcomm's base image is not included in this repository.
 - `tools/pdf/`: builds `iq-9075-tutorial.pdf` from this README with pandoc and WeasyPrint.
 - `data/power/`: the raw FNB58 logs (100 samples per second), the phase markers, and the full results in `results.md`.
 - `data/jetson/`: the Jetson results and how they were measured.
+- `data/llamacpp/`: upstream llama.cpp speeds on the IQ-9075 CPU and the Raspberry Pi 5, with the Pi's thermal log.
 
 Python dependencies are in `tools/requirements.txt`. The diagrams also need `rsvg-convert` (librsvg), and the PDF needs `pandoc` and `weasyprint`.
 

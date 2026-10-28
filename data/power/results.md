@@ -87,3 +87,18 @@ Observations:
 - **Decode on the CPU draws more power than prefill on the CPU** (21 W vs 17 W), although prefill is the compute-bound phase. Memory-bound decode keeps the DDR busy, and memory traffic costs power too.
 - **0.8B: the CPU wins in decode on both speed and energy** (0.35 vs 0.66 J/token). The llama.cpp Hexagon backend draws almost as much as the CPU (18.8 W) while generating half as fast. For prefill, even this backend saves energy: 31 J against 89 J.
 - The runtime matters for energy as much as for speed: on the NPU, QAIRT ran the 4B at 14 W, while llama.cpp's Hexagon backend needed 19 W for a model five times smaller.
+
+## Upstream llama.cpp on the CPU (2026-10-27, session-20261027-1846)
+
+llama.cpp commit 338fce6, CPU build inside an `ubuntu:24.04` container, 8 threads, `llama-server` with the same prompts and settings as above. `tools/fnb58/llm_windows.py` stamped the idle, prefill, and decode windows on the board; `tools/fnb58/llm_fnb58.py` cut them from the FNB58 log. The session log is trimmed to the test window (the meter kept logging overnight).
+
+The first pass streamed the tokens (`windows-20261027.csv`, `llm-llamacpp-cpu-20261027.csv`). On the CPU, the HTTP thread competes with the 8 inference threads, and decode dropped 5 to 20% (Qwen3.5-0.8B: 41–47 against 58 tok/s). The second pass, `--no-stream` (`windows-nostream-20261027.csv`, `llm-llamacpp-cpu-nostream-20261027.csv`), rebuilds the token times from llama.cpp's own timings and is the one used in the tutorial. Qwen3-4B from the first pass is kept as the anchor: 0.79 J/token dynamic and 316 J of prefill, against 0.79 J and 322 J with GenieX on 2026-10-26.
+
+| Model | Prompt | tok/s | Decode power | J/token (dynamic) | J/token (total) | Time to first token | Prefill energy (dynamic) | Prefill energy (total) |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Qwen3.5-4B Q4_0 | short | 14.6 | 20.8 W | 0.96 | 1.43 | 0.5 s | — | — |
+| Qwen3.5-4B Q4_0 | long (1,641) | 13.6 | 20.9 W | 1.03 | 1.54 | 24.6 s | 250 J | 419 J |
+| Qwen3.5-0.8B Q4_0 | short | 58.1 | 19.8 W | 0.22 | 0.34 | 0.1 s | — | — |
+| Qwen3.5-0.8B Q4_0 | long (1,641) | 52.7 | 19.9 W | 0.25 | 0.38 | 4.6 s | 48 J | 80 J |
+
+Idle 6.79–6.86 W. Qwen3.5-0.8B matches the GenieX run of 2026-10-26 (0.35 J/token total, 58.0 tok/s); its prefill is cheaper here (80 J against 89 J), with a shorter time to first token (4.6 s against 5.1 s).

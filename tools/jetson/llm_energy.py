@@ -91,6 +91,7 @@ def main():
     ap.add_argument("--only", nargs="*", default=lp.MODELS)
     ap.add_argument("--repeat", type=int, default=2)
     ap.add_argument("-o", "--out", required=True)
+    ap.add_argument("--load-mode", default="auto", help="llama-server --load-mode; dio keeps the model out of the page cache")
     a = ap.parse_args()
     prompts = {"short": lp.SHORT, "long": open(a.long).read()}
     jt_dyn = {}
@@ -106,7 +107,7 @@ def main():
         w.writerow(cols)
         for m in a.only:
             proc = subprocess.Popen([f"{a.bin}/llama-server", "-m", f"{a.models}/{m}.gguf", "-ngl", "99",
-                                     "-c", "4096", "--port", str(lp.PORT), "--no-webui"],
+                                     "-c", "4096", "--port", str(lp.PORT), "--no-webui", "--load-mode", a.load_mode],
                                     stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
             try:
                 lp.wait_ready(proc)

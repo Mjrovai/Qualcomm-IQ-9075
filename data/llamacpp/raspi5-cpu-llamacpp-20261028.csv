@@ -1,0 +1,13 @@
+model,prompt,run,prompt_tokens,ttft_s,prefill_tok_s,gen_tokens,decode_tok_s
+Qwen3.5-0.8B-Q4_0,short,1,25,0.25,100,256,13.2
+Qwen3.5-0.8B-Q4_0,short,2,25,0.26,97,256,13.1
+Qwen3.5-0.8B-Q4_0,long,1,1641,12.49,131,26,13.2
+Qwen3.5-0.8B-Q4_0,long,2,1641,12.48,132,26,13.0
+Qwen3-4B-Q4_0,short,1,25,0.97,26,256,4.0
+Qwen3-4B-Q4_0,short,2,25,0.86,29,256,4.0
+Qwen3-4B-Q4_0,long,1,1882,73.11,26,32,2.0
+Qwen3-4B-Q4_0,long,2,1882,73.07,26,32,2.0
+Qwen3.5-4B-Q4_0,short,1,25,1.22,20,256,2.8
+Qwen3.5-4B-Q4_0,short,2,25,1.23,20,256,2.8
+Qwen3.5-4B-Q4_0,long,1,1641,59.67,28,24,2.5
+Qwen3.5-4B-Q4_0,long,2,1641,59.86,27,24,2.5

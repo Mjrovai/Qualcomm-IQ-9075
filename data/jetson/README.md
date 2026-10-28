@@ -9,7 +9,7 @@ llama-bench (same build, GPU): Qwen3.5-0.8B pp512 2352, pp2048 2535, tg256 74.4 
 
 ## Energy (on-board sensor)
 
-`energy-0.8b-20261027.csv` and `energy-4b-20261027.csv`, from `tools/jetson/llm_energy.py`: the INA3221 rails read from sysfs at ~20 Hz, 20 s idle before each run.
+`energy-0.8b-20261027.csv`, `energy-4b-20261027.csv`, and `energy-q35-4b-20261027.csv` (Qwen3.5-4B, loaded with `--load-mode dio` so the page cache does not refill), from `tools/jetson/llm_energy.py`: the INA3221 rails read from sysfs at ~20 Hz, 20 s idle before each run.
 The sensor readings are smoothed (a load step takes ~1 s to rise and ~1.5 s to settle), so decode J/token comes from the steady part of the 256-token short-prompt run, and prefill energy is the dynamic energy of the whole long-prompt request, tails included, minus its decode energy. On the short prompt, the integral and the steady decode mean agree within 1%.
 
 Caveat: VDD_IN is the module's input rail. It leaves out the carrier board (Wi-Fi, NVMe SSD, USB, regulators) and the power supply, so these numbers are lower than a meter at the barrel jack would show, and are not directly comparable with the FNB58 numbers from the IQ-9075. The dynamic (above idle) values are the fairer comparison.

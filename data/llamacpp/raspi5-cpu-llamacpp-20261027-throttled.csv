@@ -1,0 +1,17 @@
+throttled=0x0
+temp=49.9'C
+model,prompt,run,prompt_tokens,ttft_s,prefill_tok_s,gen_tokens,decode_tok_s
+Qwen3.5-0.8B-Q4_0,short,1,25,0.22,115,256,13.5
+Qwen3.5-0.8B-Q4_0,short,2,25,0.22,112,256,14.5
+Qwen3.5-0.8B-Q4_0,long,1,1641,12.31,133,26,8.2
+Qwen3.5-0.8B-Q4_0,long,2,1641,12.28,134,26,13.3
+Qwen3-4B-Q4_0,short,1,25,0.79,32,256,4.1
+Qwen3-4B-Q4_0,short,2,25,0.81,31,256,4.1
+Qwen3-4B-Q4_0,long,1,1882,73.92,25,32,2.1
+Qwen3-4B-Q4_0,long,2,1882,75.92,25,32,2.1
+Qwen3.5-4B-Q4_0,short,1,25,1.20,21,256,2.9
+Qwen3.5-4B-Q4_0,short,2,25,1.20,21,256,2.9
+Qwen3.5-4B-Q4_0,long,1,1641,60.08,27,24,2.5
+Qwen3.5-4B-Q4_0,long,2,1641,60.36,27,24,2.6
+throttled=0xe0000
+temp=74.7'C

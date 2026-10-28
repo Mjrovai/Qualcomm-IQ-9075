@@ -37,6 +37,12 @@ def wait_ready(proc):
     raise SystemExit("llama-server not ready")
 
 
+def cool_down(limit):
+    # wait for the SoC to cool, so a passively limited board starts every run at the same temperature
+    while int(open("/sys/class/thermal/thermal_zone0/temp").read()) / 1000 > limit:
+        time.sleep(5)
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--bin", required=True)
@@ -46,6 +52,7 @@ def main():
     ap.add_argument("--threads", default=None)
     ap.add_argument("--repeat", type=int, default=2)
     ap.add_argument("--only", nargs="*", default=MODELS)
+    ap.add_argument("--cool-below", type=float, help="wait until the SoC is below this temperature (C) before each run")
     a = ap.parse_args()
     prompts = {"short": SHORT, "long": open(a.long).read()}
     print("model,prompt,run,prompt_tokens,ttft_s,prefill_tok_s,gen_tokens,decode_tok_s")
@@ -60,6 +67,8 @@ def main():
             for name, text in prompts.items():
                 # run 0 warms up; the cache is cleared so every run does a full prefill
                 for run in range(a.repeat + 1):
+                    if a.cool_below:
+                        cool_down(a.cool_below)
                     r = post("/v1/chat/completions", {
                         "messages": [{"role": "user", "content": text}],
                         "max_tokens": 256, "seed": 42, "cache_prompt": False,
