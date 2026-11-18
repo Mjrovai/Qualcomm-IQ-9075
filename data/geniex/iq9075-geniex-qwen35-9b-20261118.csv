@@ -1,0 +1,13 @@
+compute,prompt,run,spec,prompt_tokens,ttft_s,prefill_tok_s,gen_tokens,decode_tok_s,note
+npu,short,1,none,23,0.36,64.3,256,6.59,
+npu,short,2,none,23,0.36,65.1,256,6.57,
+npu,long,1,none,1641,6.67,246.1,31,6.34,
+npu,long,2,none,1641,6.66,246.5,31,6.41,
+gpu,short,1,none,23,0.97,23.8,256,4.02,
+gpu,short,2,none,,,,,,hung while loading for 1 h 49 min; killed. The remaining GPU runs were skipped.
+cpu,short,1,none,23,0.77,29.8,256,6.81,
+cpu,short,2,none,23,0.76,30.4,256,7.16,
+cpu,long,1,none,1641,44.37,37.0,32,6.79,
+cpu,long,2,none,1641,44.29,37.1,32,6.70,
+npu,short,1,mtp n=3,23,0.46,50.1,256,4.68,
+npu,short,2,mtp n=3,23,0.50,45.6,256,4.66,

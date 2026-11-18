@@ -1,0 +1,5 @@
+model,prompt,run,prompt_tokens,ttft_s,prefill_tok_s,gen_tokens,decode_tok_s
+Qwen3.5-9B-MTP-Q4_0,short,1,25,0.93,27,256,6.3
+Qwen3.5-9B-MTP-Q4_0,short,2,25,0.96,26,256,6.3
+Qwen3.5-9B-MTP-Q4_0,long,1,1641,46.99,35,33,5.5
+Qwen3.5-9B-MTP-Q4_0,long,2,1641,47.00,35,33,5.4
