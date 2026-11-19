@@ -1,0 +1,7 @@
+[
+ {"id": "portrait", "prompt": "portrait photo of an old fisherman with a gray beard, natural light, 50mm lens, detailed skin"},
+ {"id": "landscape", "prompt": "mountain lake at sunrise, pine forest, mist over the water, wide angle landscape photo"},
+ {"id": "object", "prompt": "a red vintage bicycle leaning against a white brick wall, product photo, sharp focus"},
+ {"id": "text", "prompt": "a wooden sign that says EDGE AI, hanging on a cafe door"},
+ {"id": "art", "prompt": "a lighthouse on a rocky coast during a storm, oil painting in the style of impressionism"}
+]
